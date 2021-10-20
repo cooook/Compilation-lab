@@ -3,11 +3,15 @@
 # include <string.h>
 void yyerror(const char*);
 int yylex();
+struct Information;
+class Hash_Table;
+struct AST_node; 
 %}
 
 %union{
     int intval;
     char* buffer;
+    AST_node* node;
 }
 %token<intval> T_NUM 
 %token<buffer> T_ID
