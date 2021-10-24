@@ -19,4 +19,4 @@ lex.yy.c: $(SCANNER) y.tab.c
 	flex $<
 
 y.tab.c: $(PARSER)
-	bison -vdty $<
+	bison -vdty -Wno-yacc $<
