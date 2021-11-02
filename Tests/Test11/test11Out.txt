@@ -1,0 +1,260 @@
+
+
+
+
+		START AST
+
+
+\--> program
+  \--> fun-declaration
+    |--> void
+    |--> main
+    |--> void
+    \--> compound-stmt2
+      |--> {
+      |--> local-declarations
+      | |--> local-declarations
+      | | |--> var-declaration
+      | | | |--> int
+      | | | \--> i
+      | | \--> var-declaration
+      | |   |--> int
+      | |   \--> j
+      | \--> var-declaration
+      |   |--> int
+      |   \--> k
+      |--> statement-list
+      | |--> statement-list
+      | | |--> statement-list
+      | | | |--> statement-list
+      | | | | |--> statement-list
+      | | | | | |--> statement-list
+      | | | | | | |--> statement-list
+      | | | | | | | |--> statement-list
+      | | | | | | | | |--> statement-list
+      | | | | | | | | | |--> expression
+      | | | | | | | | | | |--> i
+      | | | | | | | | | | |--> =
+      | | | | | | | | | | \--> 5
+      | | | | | | | | | \--> expression
+      | | | | | | | | |   |--> j
+      | | | | | | | | |   |--> =
+      | | | | | | | | |   \--> additive-expression
+      | | | | | | | | |     |--> i
+      | | | | | | | | |     |--> +
+      | | | | | | | | |     \--> j
+      | | | | | | | | \--> expression
+      | | | | | | | |   |--> k
+      | | | | | | | |   |--> =
+      | | | | | | | |   \--> additive-expression
+      | | | | | | | |     |--> additive-expression
+      | | | | | | | |     | |--> i
+      | | | | | | | |     | |--> +
+      | | | | | | | |     | \--> j
+      | | | | | | | |     |--> +
+      | | | | | | | |     \--> k
+      | | | | | | | \--> call
+      | | | | | | |   |--> output
+      | | | | | | |   \--> i
+      | | | | | | \--> call
+      | | | | | |   |--> output
+      | | | | | |   \--> j
+      | | | | | \--> call
+      | | | | |   |--> output
+      | | | | |   \--> k
+      | | | | \--> selection-stmt
+      | | | |   |--> if
+      | | | |   |--> simple-expression
+      | | | |   | |--> i
+      | | | |   | |--> ==
+      | | | |   | \--> i
+      | | | |   \--> compound-stmt1
+      | | | |     |--> {
+      | | | |     |--> local-declarations
+      | | | |     | |--> local-declarations
+      | | | |     | | |--> var-declaration
+      | | | |     | | | |--> int
+      | | | |     | | | \--> i
+      | | | |     | | \--> var-declaration
+      | | | |     | |   |--> int
+      | | | |     | |   \--> j
+      | | | |     | \--> var-declaration
+      | | | |     |   |--> int
+      | | | |     |   \--> k
+      | | | |     |--> statement-list
+      | | | |     | |--> statement-list
+      | | | |     | | |--> statement-list
+      | | | |     | | | |--> statement-list
+      | | | |     | | | | |--> statement-list
+      | | | |     | | | | | |--> statement-list
+      | | | |     | | | | | | |--> statement-list
+      | | | |     | | | | | | | |--> statement-list
+      | | | |     | | | | | | | | |--> statement-list
+      | | | |     | | | | | | | | | |--> expression
+      | | | |     | | | | | | | | | | |--> i
+      | | | |     | | | | | | | | | | |--> =
+      | | | |     | | | | | | | | | | \--> 10
+      | | | |     | | | | | | | | | \--> expression
+      | | | |     | | | | | | | | |   |--> j
+      | | | |     | | | | | | | | |   |--> =
+      | | | |     | | | | | | | | |   \--> additive-expression
+      | | | |     | | | | | | | | |     |--> i
+      | | | |     | | | | | | | | |     |--> +
+      | | | |     | | | | | | | | |     \--> j
+      | | | |     | | | | | | | | \--> expression
+      | | | |     | | | | | | | |   |--> k
+      | | | |     | | | | | | | |   |--> =
+      | | | |     | | | | | | | |   \--> additive-expression
+      | | | |     | | | | | | | |     |--> additive-expression
+      | | | |     | | | | | | | |     | |--> i
+      | | | |     | | | | | | | |     | |--> +
+      | | | |     | | | | | | | |     | \--> j
+      | | | |     | | | | | | | |     |--> +
+      | | | |     | | | | | | | |     \--> k
+      | | | |     | | | | | | | \--> call
+      | | | |     | | | | | | |   |--> output
+      | | | |     | | | | | | |   \--> i
+      | | | |     | | | | | | \--> call
+      | | | |     | | | | | |   |--> output
+      | | | |     | | | | | |   \--> j
+      | | | |     | | | | | \--> call
+      | | | |     | | | | |   |--> output
+      | | | |     | | | | |   \--> k
+      | | | |     | | | | \--> selection-stmt
+      | | | |     | | | |   |--> if
+      | | | |     | | | |   |--> simple-expression
+      | | | |     | | | |   | |--> j
+      | | | |     | | | |   | |--> <
+      | | | |     | | | |   | \--> k
+      | | | |     | | | |   \--> compound-stmt0
+      | | | |     | | | |     |--> {
+      | | | |     | | | |     |--> local-declarations
+      | | | |     | | | |     | |--> var-declaration
+      | | | |     | | | |     | | |--> int
+      | | | |     | | | |     | | \--> j
+      | | | |     | | | |     | \--> var-declaration
+      | | | |     | | | |     |   |--> int
+      | | | |     | | | |     |   \--> k
+      | | | |     | | | |     |--> statement-list
+      | | | |     | | | |     | |--> statement-list
+      | | | |     | | | |     | | |--> statement-list
+      | | | |     | | | |     | | | |--> statement-list
+      | | | |     | | | |     | | | | |--> expression
+      | | | |     | | | |     | | | | | |--> j
+      | | | |     | | | |     | | | | | |--> =
+      | | | |     | | | |     | | | | | \--> term
+      | | | |     | | | |     | | | | |   |--> i
+      | | | |     | | | |     | | | | |   |--> *
+      | | | |     | | | |     | | | | |   \--> 5
+      | | | |     | | | |     | | | | \--> expression
+      | | | |     | | | |     | | | |   |--> k
+      | | | |     | | | |     | | | |   |--> =
+      | | | |     | | | |     | | | |   \--> term
+      | | | |     | | | |     | | | |     |--> i
+      | | | |     | | | |     | | | |     |--> *
+      | | | |     | | | |     | | | |     \--> 10
+      | | | |     | | | |     | | | \--> call
+      | | | |     | | | |     | | |   |--> output
+      | | | |     | | | |     | | |   \--> i
+      | | | |     | | | |     | | \--> call
+      | | | |     | | | |     | |   |--> output
+      | | | |     | | | |     | |   \--> j
+      | | | |     | | | |     | \--> call
+      | | | |     | | | |     |   |--> output
+      | | | |     | | | |     |   \--> k
+      | | | |     | | | |     \--> }
+      | | | |     | | | \--> call
+      | | | |     | | |   |--> output
+      | | | |     | | |   \--> i
+      | | | |     | | \--> call
+      | | | |     | |   |--> output
+      | | | |     | |   \--> j
+      | | | |     | \--> call
+      | | | |     |   |--> output
+      | | | |     |   \--> k
+      | | | |     \--> }
+      | | | \--> call
+      | | |   |--> output
+      | | |   \--> i
+      | | \--> call
+      | |   |--> output
+      | |   \--> j
+      | \--> call
+      |   |--> output
+      |   \--> k
+      \--> }
+
+
+		END AST
+
+
+		START OF SYMBOL TABLES
+
+
+
+Symbol Table GLOBAL with Scope Level 0:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: i, Declared on line 3 and is not an Array.
+Name: j, Declared on line 4 and is not an Array.
+Name: k, Declared on line 5 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt1 with Scope Level 2:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: i, Declared on line 3 and is not an Array.
+Name: j, Declared on line 4 and is not an Array.
+Name: k, Declared on line 5 and is not an Array.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+Name: i, Declared on line 17 and is not an Array.
+Name: j, Declared on line 18 and is not an Array.
+Name: k, Declared on line 19 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt1->compound-stmt0 with Scope Level 3:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: i, Declared on line 3 and is not an Array.
+Name: j, Declared on line 4 and is not an Array.
+Name: k, Declared on line 5 and is not an Array.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+Name: i, Declared on line 17 and is not an Array.
+Name: j, Declared on line 18 and is not an Array.
+Name: k, Declared on line 19 and is not an Array.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 3 (top of the local table).
+Name: j, Declared on line 29 and is not an Array.
+Name: k, Declared on line 30 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+
+		END OF SYMBOL TABLES
+
+
+

@@ -1,0 +1,213 @@
+		
+
+	
+
+
+
+		START AST
+
+
+\--> program
+  \--> fun-declaration
+    |--> void
+    |--> main
+    |--> void
+    \--> compound-stmt4
+      |--> {
+      |--> local-declarations
+      | |--> var-declaration
+      | | |--> int
+      | | \--> x
+      | \--> var-declaration
+      |   |--> int
+      |   \--> y
+      |--> statement-list
+      | |--> statement-list
+      | | |--> expression
+      | | | |--> x
+      | | | |--> =
+      | | | \--> 45
+      | | \--> selection-stmt
+      | |   |--> if
+      | |   |--> simple-expression
+      | |   | |--> x
+      | |   | |--> >=
+      | |   | \--> 10
+      | |   |--> compound-stmt3
+      | |   | |--> {
+      | |   | |--> selection-stmt
+      | |   | | |--> if
+      | |   | | |--> simple-expression
+      | |   | | | |--> x
+      | |   | | | |--> >=
+      | |   | | | \--> 20
+      | |   | | |--> compound-stmt2
+      | |   | | | |--> {
+      | |   | | | |--> selection-stmt
+      | |   | | | | |--> if
+      | |   | | | | |--> simple-expression
+      | |   | | | | | |--> x
+      | |   | | | | | |--> >=
+      | |   | | | | | \--> 30
+      | |   | | | | |--> compound-stmt1
+      | |   | | | | | |--> {
+      | |   | | | | | |--> selection-stmt
+      | |   | | | | | | |--> if
+      | |   | | | | | | |--> simple-expression
+      | |   | | | | | | | |--> x
+      | |   | | | | | | | |--> >=
+      | |   | | | | | | | \--> 40
+      | |   | | | | | | |--> compound-stmt0
+      | |   | | | | | | | |--> {
+      | |   | | | | | | | |--> selection-stmt
+      | |   | | | | | | | | |--> if
+      | |   | | | | | | | | |--> simple-expression
+      | |   | | | | | | | | | |--> x
+      | |   | | | | | | | | | |--> >=
+      | |   | | | | | | | | | \--> 50
+      | |   | | | | | | | | |--> expression
+      | |   | | | | | | | | | |--> y
+      | |   | | | | | | | | | |--> =
+      | |   | | | | | | | | | \--> factor
+      | |   | | | | | | | | |   |--> -
+      | |   | | | | | | | | |   \--> 1
+      | |   | | | | | | | | \--> selection-stmt2
+      | |   | | | | | | | |   |--> else
+      | |   | | | | | | | |   \--> expression
+      | |   | | | | | | | |     |--> y
+      | |   | | | | | | | |     |--> =
+      | |   | | | | | | | |     \--> 4
+      | |   | | | | | | | \--> }
+      | |   | | | | | | \--> selection-stmt2
+      | |   | | | | | |   |--> else
+      | |   | | | | | |   \--> expression
+      | |   | | | | | |     |--> y
+      | |   | | | | | |     |--> =
+      | |   | | | | | |     \--> 3
+      | |   | | | | | \--> }
+      | |   | | | | \--> selection-stmt2
+      | |   | | | |   |--> else
+      | |   | | | |   \--> expression
+      | |   | | | |     |--> y
+      | |   | | | |     |--> =
+      | |   | | | |     \--> 2
+      | |   | | | \--> }
+      | |   | | \--> selection-stmt2
+      | |   | |   |--> else
+      | |   | |   \--> expression
+      | |   | |     |--> y
+      | |   | |     |--> =
+      | |   | |     \--> 1
+      | |   | \--> }
+      | |   \--> selection-stmt2
+      | |     |--> else
+      | |     \--> expression
+      | |       |--> y
+      | |       |--> =
+      | |       \--> 0
+      | \--> call
+      |   |--> output
+      |   \--> y
+      \--> }
+
+
+		END AST
+
+
+		START OF SYMBOL TABLES
+
+
+
+Symbol Table GLOBAL with Scope Level 0:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 4 and is not an Array.
+Name: y, Declared on line 5 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt3 with Scope Level 2:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 4 and is not an Array.
+Name: y, Declared on line 5 and is not an Array.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt3->compound-stmt2 with Scope Level 3:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 4 and is not an Array.
+Name: y, Declared on line 5 and is not an Array.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 3 (top of the local table).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt3->compound-stmt2->compound-stmt1 with Scope Level 4:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 4 and is not an Array.
+Name: y, Declared on line 5 and is not an Array.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 3 (top of the local table).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 4 (top of the local table).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt3->compound-stmt2->compound-stmt1->compound-stmt0 with Scope Level 5:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 4 and is not an Array.
+Name: y, Declared on line 5 and is not an Array.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 3 (top of the local table).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 4 (top of the local table).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 5 (top of the local table).
+===============================================================================
+===============================================================================
+
+
+
+		END OF SYMBOL TABLES
+
+
+

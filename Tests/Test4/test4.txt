@@ -1,0 +1,25 @@
+void main(void)
+{
+	int i;
+      	int j;
+	int array[50];
+
+	i=0;  
+	while (i < 5 )
+	{
+		j=0;
+		while (j < 10)
+		{
+			array[j+i*10] = (i*10+j)*2;
+     			j=j+1;
+		}
+		i=i+1;
+	}
+
+      	i=0;
+      	while (i < 50)
+      	{
+     		i=i+1;
+	}
+	return;
+}

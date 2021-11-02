@@ -1,0 +1,36 @@
+/* Semantic error - rem function called with wrong number of args
+*/
+
+int div(int x)
+{
+     int factor;
+
+     factor = 10;
+     return (x/factor);
+}
+
+int rem(int x, int y)
+{
+     int factor;
+
+     factor =10;
+     return (y - (factor*x));
+}
+
+void main(void)
+{
+
+     int x;
+     int dx;
+     int  rx;
+ 
+
+     while (x > 0)
+     {
+         dx = div(x);
+	 rx = rem(dx);
+
+	 x = dx;
+      }
+return;
+}
