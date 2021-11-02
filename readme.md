@@ -4,6 +4,17 @@
 
 # 上手指南
 
+## Software requirements
+
+```
+$ bison --version
+bison (GNU Bison) 3.5.1
+$ flex --version
+flex 2.6.4
+$ g++ --version
+g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+```
+
 ## lab1
 
 用词法分析器 flex 解析源文件。

@@ -83,10 +83,10 @@ iteration_stmt : KEYWORD_WHILE '(' expression ')' statement
 return_stmt : KEYWORD_RETURN ';' {}
             | KEYWORD_RETURN expression ';' { }
             ;
-expression : var '=' expression { }
+expression : var '=' expression {  }
            | simple_expression {  }
            ;
-var : ID {  }
+var : ID {  $$ = makenode($1,NULL,NULL); }
     | ID '[' expression ']' {  }
     ;
 simple_expression : additive_expression relop additive_expression { }
