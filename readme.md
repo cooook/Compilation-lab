@@ -28,7 +28,7 @@ clear && make clean && make run
 
 进入 lab3 目录，运行下列命令，会在终端输出符号表。
 ```
-clear && make clean && make PARSER=SymbolList.y SCANNER=SymbolList.l run
+clear && make clean && make run
 ```
 
 ## lab4
@@ -37,7 +37,7 @@ clear && make clean && make PARSER=SymbolList.y SCANNER=SymbolList.l run
 
 进入 lab4 目录，运行下列命令，会在终端输出语法树。
 ```
-clear && make clean && make PARSER=AST.y SCANNER=AST.l run
+clear && make clean && make run
 ```
 
 # Contributors
