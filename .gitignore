@@ -5,3 +5,7 @@ calc*
 /w-s.l
 /test*
 /make*
+/w-s*
+/Symbol_table*
+/*.y
+/*.l

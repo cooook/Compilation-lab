@@ -7,10 +7,10 @@ PARSER = my.y
 build: $(OUT)
 
 run: $(OUT)
-	./$(OUT) < test.c > test.asm
+	./$(OUT) < test.c
 
 clean:
-	rm -f *.o lex.yy.c y.tab.c y.tab.h y.output $(OUT)
+	rm -f *.o lex.yy.c y.tab.c y.tab.h y.output $(OUT) test.asm
 
 $(OUT): $(OBJ)
 	$(CC) -o $(OUT) $(OBJ)
