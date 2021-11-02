@@ -12,7 +12,7 @@ NUM        {digit}{digit}*
 
 %%
 {delim}+                                        { printf("%s", yytext); }
-"\n"                                            { printf("%s", yytext); linenumber++; }
+"\n"|"\r\n"                                     { printf("%s", yytext); linenumber++; }
 "{"|"}"|"["|"]"|"("|")"|";"|"/"|"*"|"-"|"+"|"=" { printf("%s", yytext); return yytext[0];}
 "else"                                          { printf("%s", yytext); return KEYWORD_ELSE; }
 "if"                                            { printf("%s", yytext); return KEYWORD_IF; }

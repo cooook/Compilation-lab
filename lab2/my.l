@@ -18,7 +18,7 @@ NUM ([0-9]+)
 ID ([_a-zA-Z][_a-zA-Z0-9]*)
 WHITESPACE ([ \t]*)
 %%
-"\n" {cur_line ++; printf("end of line\n");}
+"\n"|"\r\n" {cur_line ++; printf("end of line\n");}
 "if" { return T_KEYWORD_IF; }
 "{"|"}"|"["|"]"|"("|")" { return yytext[0];}
 "else" { return T_KEYWORD_ELSE; }
