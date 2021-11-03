@@ -13,10 +13,9 @@ typedef struct astnode
 }node;
 
 node* makenode(const char rootname[20],node *left ,node *right);
-void printtree (node *tree, int tab);
-// void AST_print(node *t);
+void printtree (node *tree, int tab, int flag);
 void printTabs(int numOfTabs);
-
+int flags[100];
 %}
 %union{
     char* varname;
@@ -35,10 +34,10 @@ void printTabs(int numOfTabs);
 
 %%
 
-program : declaration_list { $$ = makenode("program", $1, NULL); printtree($$,0); exit(0); }
+program : declaration_list { $$ = makenode("program", NULL, $1); printtree($$, 0, 0); exit(0); }
         ;
 declaration_list : declaration_list declaration
-                 | declaration { $$ = makenode("declaration_list", $1, NULL); }
+                 | declaration { $$ = $1; }
                  ;
 declaration : var_declaration { $$ = $1; }
             | fun_declaration { $$ = $1; }
@@ -133,11 +132,17 @@ node *makenode(const char* rootname,node *left, node *right )
 	return newnode;
 }
 
-void printtree (node* tree, int tab){
+void printtree (node* tree, int tab, int flag){
     int nextTab = tab;
     if (strlen(tree->operand) > 0) {
+        flags[tab] = 1;
         printTabs(tab);
-        printf ("|%s", tree->operand);
+        if (flag == 2 || flag == 0) {
+            printf ("\\--> %s", tree->operand);
+            flags[tab] = 0;
+        }
+        else
+            printf ("|--> %s", tree->operand);
         if (tree->left != NULL) {
             printf("\n");
         }
@@ -146,54 +151,28 @@ void printtree (node* tree, int tab){
         if (strlen(tree->operand) == 0) {
             nextTab = tab - 1;
         }
-        printtree(tree->left, nextTab + 1);
-        if (strlen(tree->operand) > 0) {
+        printtree(tree->left, nextTab + 1, 1);
+        if (strlen(tree->operand) > 0 && flag == 0) {
             printTabs(tab);
         }
     }
     if (strlen(tree->operand) > 0) {
-        printf("\n");
+        if (tree->left != NULL || tree->right != NULL)
+            printf("\n");
     }
     if (tree->right) {
-        printtree(tree->right, tab + 1);
+        flags[tab + 1] = 0;
+        printtree(tree->right, tab + 1, 2);
     }
 }
-
-// node* make_node(char* root, node* child1, node* child2)
-// {
-// 	node * node = (struct AST*)malloc(sizeof(struct AST));
-// 	node->child = (struct AST**)malloc(2*sizeof(struct AST *));
-// 	node->NumChild = 2;//
-// 	strcpy(node->lexeme,root);
-// 	node->child[0] = child1;
-// 	node->child[1] = child2;
-// 	return node;
-// }
-
-// void AST_print(node *t)
-// {
-// 	static int ctr=0;
-// 	int i;
-// 	if(t->NumChild==0)
-// 		return;
-
-// 	struct AST *t2=t;
-// 	printf("\n%s  -->",t2->lexeme);
-// 	for(i=0;i<t2->NumChild;++i)
-// 	{
-// 		printf("%s ",t2->child[i]->lexeme);
-// 	}
-// 	for(i=0;i<t2->NumChild;++i)
-// 	{
-// 		AST_print(t->child[i]);
-// 	}
-// }
 
 void printTabs(int numOfTabs) {
     int i;
     for (i = 0; i < numOfTabs; i++) {
-        // printf (i == numOfTabs - 1 ? "|  " : "  ");
-        printf("|  ");
+        if (flags[i] == 0)
+            printf("  ");
+        else
+            printf("| ");
     }
 }
 
