@@ -14,6 +14,7 @@ typedef struct astnode
 
 node* makenode(const char rootname[20],node *left ,node *right);
 void printtree (node *tree, int tab);
+// void AST_print(node *t);
 void printTabs(int numOfTabs);
 
 %}
@@ -34,21 +35,21 @@ void printTabs(int numOfTabs);
 
 %%
 
-program : declaration_list { $$=$1; printtree($$,0); exit(0); }
+program : declaration_list { $$ = makenode("program", $1, NULL); printtree($$,0); exit(0); }
         ;
 declaration_list : declaration_list declaration
-                 | declaration { $$ = $1; }
+                 | declaration { $$ = makenode("declaration_list", $1, NULL); }
                  ;
 declaration : var_declaration { $$ = $1; }
             | fun_declaration { $$ = $1; }
             ;
-var_declaration : type_specifier ID ';' {  }
+var_declaration : type_specifier ID ';' { $$ = makenode("var-declaration", $1, makenode($2, NULL, NULL)); }
                 | type_specifier ID '[' NUM ']' ';'
                 ;
 type_specifier : KEYWORD_INT { $$ = makenode($1, NULL, NULL); }
                | KEYWORD_VOID { $$ = makenode($1, NULL, NULL); }
                ;
-fun_declaration : type_specifier ID '(' params ')' compound_stmt {  }
+fun_declaration : type_specifier ID '(' params ')' compound_stmt { $$ = makenode("fun_declaration", $1, $6); }
                 ;
 params : param_list { $$ = $1; }
        | KEYWORD_VOID { $$ = makenode($1, NULL, NULL); }
@@ -59,12 +60,12 @@ param_list : param_list ',' param
 param : type_specifier ID
       | type_specifier ID '[' ']'
       ;
-compound_stmt : '{' local_declarations statement_list '}' { $$=$3; }
+compound_stmt : '{' local_declarations statement_list '}' { $$ = makenode("compound_stmt", $2, $3); }
               ;
-local_declarations : local_declarations var_declaration
-                   | {}
+local_declarations : local_declarations var_declaration { $$ = makenode("local-declarations", $1, $2); }
+                   | { $$ = makenode(" ", NULL, NULL); }
                    ;
-statement_list : statement_list statement { $$=$2; }
+statement_list : statement_list statement { $$ = makenode("statement_list", $1, $2); }
                | {}
                ;
 statement : expression_stmt { $$ = $1; }
@@ -81,7 +82,7 @@ selection_stmt : KEYWORD_IF '(' expression ')' statement {}
                ;
 iteration_stmt : KEYWORD_WHILE '(' expression ')' statement {}
                ;
-return_stmt : KEYWORD_RETURN ';' {}
+return_stmt : KEYWORD_RETURN ';' { $$ = makenode("return", NULL, NULL); }
             | KEYWORD_RETURN expression ';' { }
             ;
 expression : var '=' expression { $$ = makenode("=",$1,$3); }
@@ -131,11 +132,12 @@ node *makenode(const char* rootname,node *left, node *right )
 	newnode->right = right;
 	return newnode;
 }
+
 void printtree (node* tree, int tab){
     int nextTab = tab;
     if (strlen(tree->operand) > 0) {
         printTabs(tab);
-        printf ("(%s", tree->operand);
+        printf ("|%s", tree->operand);
         if (tree->left != NULL) {
             printf("\n");
         }
@@ -150,16 +152,48 @@ void printtree (node* tree, int tab){
         }
     }
     if (strlen(tree->operand) > 0) {
-        printf (")\n");
+        printf("\n");
     }
     if (tree->right) {
-        printtree (tree->right, tab);
+        printtree(tree->right, tab + 1);
     }
 }
+
+// node* make_node(char* root, node* child1, node* child2)
+// {
+// 	node * node = (struct AST*)malloc(sizeof(struct AST));
+// 	node->child = (struct AST**)malloc(2*sizeof(struct AST *));
+// 	node->NumChild = 2;//
+// 	strcpy(node->lexeme,root);
+// 	node->child[0] = child1;
+// 	node->child[1] = child2;
+// 	return node;
+// }
+
+// void AST_print(node *t)
+// {
+// 	static int ctr=0;
+// 	int i;
+// 	if(t->NumChild==0)
+// 		return;
+
+// 	struct AST *t2=t;
+// 	printf("\n%s  -->",t2->lexeme);
+// 	for(i=0;i<t2->NumChild;++i)
+// 	{
+// 		printf("%s ",t2->child[i]->lexeme);
+// 	}
+// 	for(i=0;i<t2->NumChild;++i)
+// 	{
+// 		AST_print(t->child[i]);
+// 	}
+// }
+
 void printTabs(int numOfTabs) {
     int i;
     for (i = 0; i < numOfTabs; i++) {
-        printf ("\t");
+        // printf (i == numOfTabs - 1 ? "|  " : "  ");
+        printf("|  ");
     }
 }
 
