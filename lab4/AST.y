@@ -74,12 +74,12 @@ statement : expression_stmt { $$ = $1; }
           | return_stmt     { $$ = $1; }
           ;
 expression_stmt : expression ';' { $$=$1; }
-                | ';'
+                | ';' {}
                 ;
-selection_stmt : KEYWORD_IF '(' expression ')' statement
-               | KEYWORD_IF '(' expression ')' statement KEYWORD_ELSE statement
+selection_stmt : KEYWORD_IF '(' expression ')' statement {}
+               | KEYWORD_IF '(' expression ')' statement KEYWORD_ELSE statement {}
                ;
-iteration_stmt : KEYWORD_WHILE '(' expression ')' statement
+iteration_stmt : KEYWORD_WHILE '(' expression ')' statement {}
                ;
 return_stmt : KEYWORD_RETURN ';' {}
             | KEYWORD_RETURN expression ';' { }
@@ -113,7 +113,7 @@ factor : '(' expression ')' { $$ = $2; }
        | call { $$ = $1; }
        | NUM { $$ = makenode($1,NULL,NULL); }
        ;
-call : ID '(' args ')'
+call : ID '(' args ')' {}
      ;
 args : arg_list { $$ = $1; }
      | {}
