@@ -1,5 +1,5 @@
 run: w-s
-	./w-s < test.c
+	./w-s < ../Tests/Test1/test1.txt
 
 clean:
 	rm -f lex.yy.c w-s
