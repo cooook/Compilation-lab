@@ -105,7 +105,7 @@ additive_expression : additive_expression '+' term { $$ = $1 + $3; }
                     | term { $$ = $1; }
                     ;
 term : term '*' factor { $$ = $1 * $3; }
-     | term '/' factor { if (($3) != 0 )
+     | term '/' factor { if (($3) != 0)
                               $$ = $1 / $3;
                          else
                               yyerror("divide by zero");

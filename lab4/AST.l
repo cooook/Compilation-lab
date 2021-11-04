@@ -1,7 +1,6 @@
 %{
 #include "y.tab.h"
 void yyerror(const char *msg);
-int linenumber = 1;
 %}
 %option yylineno
 delim      [ \t]
@@ -12,7 +11,7 @@ NUM        {digit}{digit}*
 
 %%
 {delim}+                                        { printf("%s", yytext); }
-"\n"|"\r\n"                                     { printf("%s", yytext); linenumber++; }
+"\n"|"\r\n"                                     { printf("%s", yytext); }
 "{"|"}"|"["|"]"|"("|")"|";"|"/"|"*"|"-"|"+"|"=" { printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
 "else"                                          { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_ELSE; }
 "if"                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_IF; }
