@@ -62,10 +62,10 @@ param : type_specifier ID
 compound_stmt : '{' local_declarations statement_list '}' { $$ = makenode("compound_stmt", $2, $3); }
               ;
 local_declarations : local_declarations var_declaration { $$ = makenode("local-declarations", $1, $2); }
-                   | { $$ = makenode(" ", NULL, NULL); }
+                   | { $$ = makenode("empty", NULL, NULL); }
                    ;
 statement_list : statement_list statement { $$ = makenode("statement_list", $1, $2); }
-               | {}
+               | {$$ = makenode("empty", NULL, NULL); }
                ;
 statement : expression_stmt { $$ = $1; }
           | compound_stmt   { $$ = $1; }
@@ -81,7 +81,7 @@ selection_stmt : KEYWORD_IF '(' expression ')' statement {}
                ;
 iteration_stmt : KEYWORD_WHILE '(' expression ')' statement {}
                ;
-return_stmt : KEYWORD_RETURN ';' { $$ = makenode("return", NULL, NULL); }
+return_stmt : KEYWORD_RETURN ';' { $$ = makenode("return\n", NULL, NULL); }
             | KEYWORD_RETURN expression ';' { }
             ;
 expression : var '=' expression { $$ = makenode("=",$1,$3); }
@@ -135,14 +135,18 @@ node *makenode(const char* rootname,node *left, node *right )
 void printtree (node* tree, int tab, int flag){
     int nextTab = tab;
     if (strlen(tree->operand) > 0) {
-        flags[tab] = 1;
-        printTabs(tab);
+        if (strcmp(tree->operand, "empty") != 0){
+            flags[tab] = 1;
+            printTabs(tab);
+        }
         if (flag == 2 || flag == 0) {
             printf ("\\--> %s", tree->operand);
             flags[tab] = 0;
         }
-        else
-            printf ("|--> %s", tree->operand);
+        else{
+            if (strcmp(tree->operand, "empty") != 0)
+                printf ("|--> %s", tree->operand);
+        }
         if (tree->left != NULL) {
             printf("\n");
         }
@@ -157,8 +161,9 @@ void printtree (node* tree, int tab, int flag){
         }
     }
     if (strlen(tree->operand) > 0) {
-        if (tree->left != NULL || tree->right != NULL)
-            printf("\n");
+        if (tree->left || tree->right)
+            if ((tree->left && strcmp(tree->left->operand, "empty") != 0) || tree->left == NULL)
+                printf("\n");
     }
     if (tree->right) {
         flags[tab + 1] = 0;
