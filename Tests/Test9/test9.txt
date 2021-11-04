@@ -1,0 +1,21 @@
+int Fibonacci(int x1)
+{
+     	int val;
+
+	if (x1 == 1) val = 1;
+ 	if (x1 == 2) val = 1;
+	if (x1 > 2) val = Fibonacci(x1-2)+Fibonacci(x1-1);
+      	return val;
+}
+
+void main(void)
+{
+       	int x;
+       	int y;
+       	int result;
+
+	 x = 5;
+	 y = 2;
+       	result = Fibonacci(x*y);
+       	return;
+}

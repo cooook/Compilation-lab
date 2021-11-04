@@ -1,0 +1,18 @@
+/* Syntax error - Missing ')'
+*/
+
+void main(void)
+{
+
+    int x;
+    int div;
+    int rem;
+
+    while (x > 0)
+    {
+       div = x/10;
+       rem = x-(div*10;
+       x = div;
+    }
+return;
+}

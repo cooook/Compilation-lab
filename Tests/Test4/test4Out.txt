@@ -1,0 +1,209 @@
+		
+
+
+
+
+		START AST
+
+
+\--> program
+  \--> fun-declaration
+    |--> void
+    |--> main
+    |--> void
+    \--> compound-stmt3
+      |--> {
+      |--> local-declarations
+      | |--> local-declarations
+      | | |--> var-declaration
+      | | | |--> int
+      | | | \--> i
+      | | \--> var-declaration
+      | |   |--> int
+      | |   \--> j
+      | \--> var-declaration
+      |   |--> int
+      |   |--> array
+      |   |--> [
+      |   |--> 50
+      |   \--> ]
+      |--> statement-list
+      | |--> statement-list
+      | | |--> statement-list
+      | | | |--> expression
+      | | | | |--> i
+      | | | | |--> =
+      | | | | \--> 0
+      | | | \--> iteration-stmt
+      | | |   |--> while
+      | | |   |--> simple-expression
+      | | |   | |--> i
+      | | |   | |--> <
+      | | |   | \--> 5
+      | | |   \--> compound-stmt1
+      | | |     |--> {
+      | | |     |--> statement-list
+      | | |     | |--> statement-list
+      | | |     | | |--> expression
+      | | |     | | | |--> j
+      | | |     | | | |--> =
+      | | |     | | | \--> 0
+      | | |     | | \--> iteration-stmt
+      | | |     | |   |--> while
+      | | |     | |   |--> simple-expression
+      | | |     | |   | |--> j
+      | | |     | |   | |--> <
+      | | |     | |   | \--> 10
+      | | |     | |   \--> compound-stmt0
+      | | |     | |     |--> {
+      | | |     | |     |--> statement-list
+      | | |     | |     | |--> expression
+      | | |     | |     | | |--> var
+      | | |     | |     | | | |--> array
+      | | |     | |     | | | |--> [
+      | | |     | |     | | | |--> additive-expression
+      | | |     | |     | | | | |--> j
+      | | |     | |     | | | | |--> +
+      | | |     | |     | | | | \--> term
+      | | |     | |     | | | |   |--> i
+      | | |     | |     | | | |   |--> *
+      | | |     | |     | | | |   \--> 10
+      | | |     | |     | | | \--> ]
+      | | |     | |     | | |--> =
+      | | |     | |     | | \--> term
+      | | |     | |     | |   |--> additive-expression
+      | | |     | |     | |   | |--> term
+      | | |     | |     | |   | | |--> i
+      | | |     | |     | |   | | |--> *
+      | | |     | |     | |   | | \--> 10
+      | | |     | |     | |   | |--> +
+      | | |     | |     | |   | \--> j
+      | | |     | |     | |   |--> *
+      | | |     | |     | |   \--> 2
+      | | |     | |     | \--> expression
+      | | |     | |     |   |--> j
+      | | |     | |     |   |--> =
+      | | |     | |     |   \--> additive-expression
+      | | |     | |     |     |--> j
+      | | |     | |     |     |--> +
+      | | |     | |     |     \--> 1
+      | | |     | |     \--> }
+      | | |     | \--> expression
+      | | |     |   |--> i
+      | | |     |   |--> =
+      | | |     |   \--> additive-expression
+      | | |     |     |--> i
+      | | |     |     |--> +
+      | | |     |     \--> 1
+      | | |     \--> }
+      | | \--> expression
+      | |   |--> i
+      | |   |--> =
+      | |   \--> 0
+      | \--> iteration-stmt
+      |   |--> while
+      |   |--> simple-expression
+      |   | |--> i
+      |   | |--> <
+      |   | \--> 50
+      |   \--> compound-stmt2
+      |     |--> {
+      |     |--> statement-list
+      |     | |--> call
+      |     | | |--> output
+      |     | | \--> var
+      |     | |   |--> array
+      |     | |   |--> [
+      |     | |   |--> i
+      |     | |   \--> ]
+      |     | \--> expression
+      |     |   |--> i
+      |     |   |--> =
+      |     |   \--> additive-expression
+      |     |     |--> i
+      |     |     |--> +
+      |     |     \--> 1
+      |     \--> }
+      \--> }
+
+
+		END AST
+
+
+		START OF SYMBOL TABLES
+
+
+
+Symbol Table GLOBAL with Scope Level 0:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: i, Declared on line 3 and is not an Array.
+Name: j, Declared on line 4 and is not an Array.
+Name: array, Declared on line 5 and has an array bounds of 50.
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt1 with Scope Level 2:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: i, Declared on line 3 and is not an Array.
+Name: j, Declared on line 4 and is not an Array.
+Name: array, Declared on line 5 and has an array bounds of 50.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt1->compound-stmt0 with Scope Level 3:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: i, Declared on line 3 and is not an Array.
+Name: j, Declared on line 4 and is not an Array.
+Name: array, Declared on line 5 and has an array bounds of 50.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 3 (top of the local table).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt2 with Scope Level 2:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: i, Declared on line 3 and is not an Array.
+Name: j, Declared on line 4 and is not an Array.
+Name: array, Declared on line 5 and has an array bounds of 50.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+===============================================================================
+===============================================================================
+
+
+
+		END OF SYMBOL TABLES
+
+
+

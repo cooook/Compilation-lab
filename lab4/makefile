@@ -1,13 +1,14 @@
-CC = gcc
-OUT = tcc
+CC = g++
+OUT = calc
 OBJ = lex.yy.o y.tab.o
-SCANNER = my.l
-PARSER = my.y
+SCANNER = AST.l
+PARSER = AST.y
+TESTFILE = ../Tests/Test1/test1.txt
 
 build: $(OUT)
 
 run: $(OUT)
-	./$(OUT) < test.c
+	./$(OUT) < $(TESTFILE)
 
 clean:
 	rm -f *.o lex.yy.c y.tab.c y.tab.h y.output $(OUT) test.asm

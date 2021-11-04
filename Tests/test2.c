@@ -3,8 +3,9 @@ int main() {
 
     }
     else {
-        
+
     }
     int a = 2333;
+    int b = 4;
     return 0;
 }

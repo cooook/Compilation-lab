@@ -1,0 +1,35 @@
+Test 1 ok   
+Test 1e ok（不支持负数 修改后可以）
+
+Test 2 ok   
+Test 2e 无法识别
+
+Test 3 ok   
+Test 3e ok
+
+Test 4 不行
+Test 4e ok
+
+Test 5 不行
+Test 5e ok
+
+Test 6 ok   
+Test 6e ok
+
+Test 7 ok   
+Test 7e ok
+
+Test 8 ok   
+Test 8e 无法识别参数个数
+
+Test 9 ok   
+Test 9e ok
+
+Test 10 ok 
+Test 10e 无法识别
+
+Test 11 ok 
+Test 11e ok
+
+不支持input output
+不支持数组

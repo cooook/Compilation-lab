@@ -1,0 +1,209 @@
+		
+
+
+	
+
+
+		START AST
+
+
+\--> program
+  \--> declaration-list
+    |--> declaration-list
+    | |--> fun-declaration
+    | | |--> int
+    | | |--> div
+    | | |--> param
+    | | | |--> int
+    | | | \--> x
+    | | \--> compound-stmt0
+    | |   |--> {
+    | |   |--> var-declaration
+    | |   | |--> int
+    | |   | \--> factor
+    | |   |--> statement-list
+    | |   | |--> expression
+    | |   | | |--> factor
+    | |   | | |--> =
+    | |   | | \--> 10
+    | |   | \--> return-stmt
+    | |   |   |--> return
+    | |   |   \--> term
+    | |   |     |--> x
+    | |   |     |--> /
+    | |   |     \--> factor
+    | |   \--> }
+    | \--> fun-declaration
+    |   |--> int
+    |   |--> rem
+    |   |--> param-list
+    |   | |--> param
+    |   | | |--> int
+    |   | | \--> x
+    |   | \--> param
+    |   |   |--> int
+    |   |   \--> y
+    |   \--> compound-stmt1
+    |     |--> {
+    |     |--> var-declaration
+    |     | |--> int
+    |     | \--> factor
+    |     |--> statement-list
+    |     | |--> expression
+    |     | | |--> factor
+    |     | | |--> =
+    |     | | \--> 10
+    |     | \--> return-stmt
+    |     |   |--> return
+    |     |   \--> additive-expression
+    |     |     |--> y
+    |     |     |--> -
+    |     |     \--> term
+    |     |       |--> factor
+    |     |       |--> *
+    |     |       \--> x
+    |     \--> }
+    \--> fun-declaration
+      |--> void
+      |--> main
+      |--> void
+      \--> compound-stmt3
+        |--> {
+        |--> local-declarations
+        | |--> local-declarations
+        | | |--> var-declaration
+        | | | |--> int
+        | | | \--> x
+        | | \--> var-declaration
+        | |   |--> int
+        | |   \--> dx
+        | \--> var-declaration
+        |   |--> int
+        |   \--> rx
+        |--> statement-list
+        | |--> expression
+        | | |--> x
+        | | |--> =
+        | | \--> call
+        | |   \--> input
+        | \--> iteration-stmt
+        |   |--> while
+        |   |--> simple-expression
+        |   | |--> x
+        |   | |--> >
+        |   | \--> 0
+        |   \--> compound-stmt2
+        |     |--> {
+        |     |--> statement-list
+        |     | |--> statement-list
+        |     | | |--> statement-list
+        |     | | | |--> expression
+        |     | | | | |--> dx
+        |     | | | | |--> =
+        |     | | | | \--> call
+        |     | | | |   |--> div
+        |     | | | |   \--> x
+        |     | | | \--> expression
+        |     | | |   |--> rx
+        |     | | |   |--> =
+        |     | | |   \--> call
+        |     | | |     |--> rem
+        |     | | |     \--> arg-list
+        |     | | |       |--> dx
+        |     | | |       \--> x
+        |     | | \--> call
+        |     | |   |--> output
+        |     | |   \--> rx
+        |     | \--> expression
+        |     |   |--> x
+        |     |   |--> =
+        |     |   \--> dx
+        |     \--> }
+        \--> }
+
+
+		END AST
+
+
+		START OF SYMBOL TABLES
+
+
+
+Symbol Table GLOBAL with Scope Level 0:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: div, Declared on line 1 with return type int and takes 1 parameter(s).
+Name: rem, Declared on line 9 with return type int and takes 2 parameter(s).
+Name: main, Declared on line 17 with return type void and takes 0 parameter(s).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->div with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: div, Declared on line 1 with return type int and takes 1 parameter(s).
+Name: rem, Declared on line 9 with return type int and takes 2 parameter(s).
+Name: main, Declared on line 17 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 1 and is not an Array.
+Name: factor, Declared on line 3 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->rem with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: div, Declared on line 1 with return type int and takes 1 parameter(s).
+Name: rem, Declared on line 9 with return type int and takes 2 parameter(s).
+Name: main, Declared on line 17 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 9 and is not an Array.
+Name: y, Declared on line 9 and is not an Array.
+Name: factor, Declared on line 11 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: div, Declared on line 1 with return type int and takes 1 parameter(s).
+Name: rem, Declared on line 9 with return type int and takes 2 parameter(s).
+Name: main, Declared on line 17 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 20 and is not an Array.
+Name: dx, Declared on line 21 and is not an Array.
+Name: rx, Declared on line 22 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main->compound-stmt2 with Scope Level 2:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: div, Declared on line 1 with return type int and takes 1 parameter(s).
+Name: rem, Declared on line 9 with return type int and takes 2 parameter(s).
+Name: main, Declared on line 17 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 20 and is not an Array.
+Name: dx, Declared on line 21 and is not an Array.
+Name: rx, Declared on line 22 and is not an Array.
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 2 (top of the local table).
+===============================================================================
+===============================================================================
+
+
+
+		END OF SYMBOL TABLES
+
+
+
+
+		

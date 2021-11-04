@@ -1,0 +1,29 @@
+void main(void)
+{
+	int array[5];
+	int a;
+	int b;
+	int c;
+	int d;
+	int e;
+	array[0]=0;
+	array[1]=1;
+	array[2]=2;
+	array[3]=3;
+	array[4]=4;
+
+
+      	a 	= 10*array[0];			/* a = 0 */
+	b 	= 5*array[1];			/* b = 5 */
+	c 	= 2*array[2];			/* c = 4 */
+	d 	= 20*array[3];			/* d = 60 */
+	e	= 10*array[4]/array[2];		/* e = 20 */
+
+	/* array[0] = (85-60-1)/(60/5)=24/12=2   
+	*/
+	array[0] = ((b+c*e-d-1)/((array[0]+(e*array[3]/(array[2]+array[3])))));
+
+	/* 2*5 = 10			
+	*/
+	return;						
+}

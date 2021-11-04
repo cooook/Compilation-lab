@@ -1,0 +1,159 @@
+		
+
+		START AST
+
+
+\--> program
+  \--> declaration-list
+    |--> fun-declaration
+    | |--> int
+    | |--> Fibonacci
+    | |--> param
+    | | |--> int
+    | | \--> x1
+    | \--> compound-stmt0
+    |   |--> {
+    |   |--> var-declaration
+    |   | |--> int
+    |   | \--> val
+    |   |--> statement-list
+    |   | |--> statement-list
+    |   | | |--> statement-list
+    |   | | | |--> selection-stmt
+    |   | | | | |--> if
+    |   | | | | |--> simple-expression
+    |   | | | | | |--> x1
+    |   | | | | | |--> ==
+    |   | | | | | \--> 1
+    |   | | | | \--> expression
+    |   | | | |   |--> val
+    |   | | | |   |--> =
+    |   | | | |   \--> 1
+    |   | | | \--> selection-stmt
+    |   | | |   |--> if
+    |   | | |   |--> simple-expression
+    |   | | |   | |--> x1
+    |   | | |   | |--> ==
+    |   | | |   | \--> 2
+    |   | | |   \--> expression
+    |   | | |     |--> val
+    |   | | |     |--> =
+    |   | | |     \--> 1
+    |   | | \--> selection-stmt
+    |   | |   |--> if
+    |   | |   |--> simple-expression
+    |   | |   | |--> x1
+    |   | |   | |--> >
+    |   | |   | \--> 2
+    |   | |   \--> expression
+    |   | |     |--> val
+    |   | |     |--> =
+    |   | |     \--> additive-expression
+    |   | |       |--> call
+    |   | |       | |--> Fibonacci
+    |   | |       | \--> additive-expression
+    |   | |       |   |--> x1
+    |   | |       |   |--> -
+    |   | |       |   \--> 2
+    |   | |       |--> +
+    |   | |       \--> call
+    |   | |         |--> Fibonacci
+    |   | |         \--> additive-expression
+    |   | |           |--> x1
+    |   | |           |--> -
+    |   | |           \--> 1
+    |   | \--> return-stmt
+    |   |   |--> return
+    |   |   \--> val
+    |   \--> }
+    \--> fun-declaration
+      |--> void
+      |--> main
+      |--> void
+      \--> compound-stmt1
+        |--> {
+        |--> local-declarations
+        | |--> local-declarations
+        | | |--> var-declaration
+        | | | |--> int
+        | | | \--> x
+        | | \--> var-declaration
+        | |   |--> int
+        | |   \--> y
+        | \--> var-declaration
+        |   |--> int
+        |   \--> result
+        |--> statement-list
+        | |--> statement-list
+        | | |--> statement-list
+        | | | |--> expression
+        | | | | |--> x
+        | | | | |--> =
+        | | | | \--> 5
+        | | | \--> expression
+        | | |   |--> y
+        | | |   |--> =
+        | | |   \--> 2
+        | | \--> expression
+        | |   |--> result
+        | |   |--> =
+        | |   \--> call
+        | |     |--> Fibonacci
+        | |     \--> term
+        | |       |--> x
+        | |       |--> *
+        | |       \--> y
+        | \--> call
+        |   |--> output
+        |   \--> result
+        \--> }
+
+
+		END AST
+
+
+		START OF SYMBOL TABLES
+
+
+
+Symbol Table GLOBAL with Scope Level 0:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: Fibonacci, Declared on line 1 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 11 with return type void and takes 0 parameter(s).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->Fibonacci with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: Fibonacci, Declared on line 1 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 11 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x1, Declared on line 1 and is not an Array.
+Name: val, Declared on line 3 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: Fibonacci, Declared on line 1 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 11 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: x, Declared on line 13 and is not an Array.
+Name: y, Declared on line 14 and is not an Array.
+Name: result, Declared on line 15 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+
+		END OF SYMBOL TABLES
+
+
+

@@ -1,0 +1,123 @@
+		
+
+		START AST
+
+
+\--> program
+  \--> fun-declaration
+    |--> void
+    |--> main
+    |--> void
+    \--> compound-stmt0
+      |--> {
+      |--> local-declarations
+      | |--> local-declarations
+      | | |--> local-declarations
+      | | | |--> local-declarations
+      | | | | |--> var-declaration
+      | | | | | |--> int
+      | | | | | \--> i
+      | | | | \--> var-declaration
+      | | | |   |--> int
+      | | | |   \--> j
+      | | | \--> var-declaration
+      | | |   |--> int
+      | | |   \--> a
+      | | \--> var-declaration
+      | |   |--> int
+      | |   \--> b
+      | \--> var-declaration
+      |   |--> int
+      |   \--> c
+      |--> statement-list
+      | |--> statement-list
+      | | |--> statement-list
+      | | | |--> statement-list
+      | | | | |--> statement-list
+      | | | | | |--> statement-list
+      | | | | | | |--> expression
+      | | | | | | | |--> i
+      | | | | | | | |--> =
+      | | | | | | | \--> 3
+      | | | | | | \--> expression
+      | | | | | |   |--> j
+      | | | | | |   |--> =
+      | | | | | |   \--> 4
+      | | | | | \--> expression
+      | | | | |   |--> a
+      | | | | |   |--> =
+      | | | | |   \--> additive-expression
+      | | | | |     |--> additive-expression
+      | | | | |     | |--> i
+      | | | | |     | |--> +
+      | | | | |     | \--> j
+      | | | | |     |--> +
+      | | | | |     \--> 1
+      | | | | \--> expression
+      | | | |   |--> b
+      | | | |   |--> =
+      | | | |   \--> term
+      | | | |     |--> term
+      | | | |     | |--> i
+      | | | |     | |--> *
+      | | | |     | \--> j
+      | | | |     |--> *
+      | | | |     \--> 2
+      | | | \--> expression
+      | | |   |--> b
+      | | |   |--> =
+      | | |   \--> factor
+      | | |     |--> -
+      | | |     \--> b
+      | | \--> expression
+      | |   |--> c
+      | |   |--> =
+      | |   \--> term
+      | |     |--> b
+      | |     |--> /
+      | |     \--> factor
+      | |       |--> -
+      | |       \--> a
+      | \--> call
+      |   |--> output
+      |   \--> c
+      \--> }
+
+
+		END AST
+
+
+		START OF SYMBOL TABLES
+
+
+
+Symbol Table GLOBAL with Scope Level 0:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: i, Declared on line 3 and is not an Array.
+Name: j, Declared on line 4 and is not an Array.
+Name: a, Declared on line 5 and is not an Array.
+Name: b, Declared on line 6 and is not an Array.
+Name: c, Declared on line 7 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+
+		END OF SYMBOL TABLES
+
+
+
+
+	

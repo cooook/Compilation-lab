@@ -1,0 +1,252 @@
+		
+
+
+		START AST
+
+
+\--> program
+  \--> fun-declaration
+    |--> void
+    |--> main
+    |--> void
+    \--> compound-stmt0
+      |--> {
+      |--> local-declarations
+      | |--> local-declarations
+      | | |--> local-declarations
+      | | | |--> local-declarations
+      | | | | |--> local-declarations
+      | | | | | |--> var-declaration
+      | | | | | | |--> int
+      | | | | | | |--> array
+      | | | | | | |--> [
+      | | | | | | |--> 5
+      | | | | | | \--> ]
+      | | | | | \--> var-declaration
+      | | | | |   |--> int
+      | | | | |   \--> a
+      | | | | \--> var-declaration
+      | | | |   |--> int
+      | | | |   \--> b
+      | | | \--> var-declaration
+      | | |   |--> int
+      | | |   \--> c
+      | | \--> var-declaration
+      | |   |--> int
+      | |   \--> d
+      | \--> var-declaration
+      |   |--> int
+      |   \--> e
+      |--> statement-list
+      | |--> statement-list
+      | | |--> statement-list
+      | | | |--> statement-list
+      | | | | |--> statement-list
+      | | | | | |--> statement-list
+      | | | | | | |--> statement-list
+      | | | | | | | |--> statement-list
+      | | | | | | | | |--> statement-list
+      | | | | | | | | | |--> statement-list
+      | | | | | | | | | | |--> statement-list
+      | | | | | | | | | | | |--> expression
+      | | | | | | | | | | | | |--> var
+      | | | | | | | | | | | | | |--> array
+      | | | | | | | | | | | | | |--> [
+      | | | | | | | | | | | | | |--> 0
+      | | | | | | | | | | | | | \--> ]
+      | | | | | | | | | | | | |--> =
+      | | | | | | | | | | | | \--> 0
+      | | | | | | | | | | | \--> expression
+      | | | | | | | | | | |   |--> var
+      | | | | | | | | | | |   | |--> array
+      | | | | | | | | | | |   | |--> [
+      | | | | | | | | | | |   | |--> 1
+      | | | | | | | | | | |   | \--> ]
+      | | | | | | | | | | |   |--> =
+      | | | | | | | | | | |   \--> 1
+      | | | | | | | | | | \--> expression
+      | | | | | | | | | |   |--> var
+      | | | | | | | | | |   | |--> array
+      | | | | | | | | | |   | |--> [
+      | | | | | | | | | |   | |--> 2
+      | | | | | | | | | |   | \--> ]
+      | | | | | | | | | |   |--> =
+      | | | | | | | | | |   \--> 2
+      | | | | | | | | | \--> expression
+      | | | | | | | | |   |--> var
+      | | | | | | | | |   | |--> array
+      | | | | | | | | |   | |--> [
+      | | | | | | | | |   | |--> 3
+      | | | | | | | | |   | \--> ]
+      | | | | | | | | |   |--> =
+      | | | | | | | | |   \--> 3
+      | | | | | | | | \--> expression
+      | | | | | | | |   |--> var
+      | | | | | | | |   | |--> array
+      | | | | | | | |   | |--> [
+      | | | | | | | |   | |--> 4
+      | | | | | | | |   | \--> ]
+      | | | | | | | |   |--> =
+      | | | | | | | |   \--> 4
+      | | | | | | | \--> expression
+      | | | | | | |   |--> a
+      | | | | | | |   |--> =
+      | | | | | | |   \--> term
+      | | | | | | |     |--> 10
+      | | | | | | |     |--> *
+      | | | | | | |     \--> var
+      | | | | | | |       |--> array
+      | | | | | | |       |--> [
+      | | | | | | |       |--> 0
+      | | | | | | |       \--> ]
+      | | | | | | \--> expression
+      | | | | | |   |--> b
+      | | | | | |   |--> =
+      | | | | | |   \--> term
+      | | | | | |     |--> 5
+      | | | | | |     |--> *
+      | | | | | |     \--> var
+      | | | | | |       |--> array
+      | | | | | |       |--> [
+      | | | | | |       |--> 1
+      | | | | | |       \--> ]
+      | | | | | \--> expression
+      | | | | |   |--> c
+      | | | | |   |--> =
+      | | | | |   \--> term
+      | | | | |     |--> 2
+      | | | | |     |--> *
+      | | | | |     \--> var
+      | | | | |       |--> array
+      | | | | |       |--> [
+      | | | | |       |--> 2
+      | | | | |       \--> ]
+      | | | | \--> expression
+      | | | |   |--> d
+      | | | |   |--> =
+      | | | |   \--> term
+      | | | |     |--> 20
+      | | | |     |--> *
+      | | | |     \--> var
+      | | | |       |--> array
+      | | | |       |--> [
+      | | | |       |--> 3
+      | | | |       \--> ]
+      | | | \--> expression
+      | | |   |--> e
+      | | |   |--> =
+      | | |   \--> term
+      | | |     |--> term
+      | | |     | |--> 10
+      | | |     | |--> *
+      | | |     | \--> var
+      | | |     |   |--> array
+      | | |     |   |--> [
+      | | |     |   |--> 4
+      | | |     |   \--> ]
+      | | |     |--> /
+      | | |     \--> var
+      | | |       |--> array
+      | | |       |--> [
+      | | |       |--> 2
+      | | |       \--> ]
+      | | \--> expression
+      | |   |--> var
+      | |   | |--> array
+      | |   | |--> [
+      | |   | |--> 0
+      | |   | \--> ]
+      | |   |--> =
+      | |   \--> term
+      | |     |--> additive-expression
+      | |     | |--> additive-expression
+      | |     | | |--> additive-expression
+      | |     | | | |--> b
+      | |     | | | |--> +
+      | |     | | | \--> term
+      | |     | | |   |--> c
+      | |     | | |   |--> *
+      | |     | | |   \--> e
+      | |     | | |--> -
+      | |     | | \--> d
+      | |     | |--> -
+      | |     | \--> 1
+      | |     |--> /
+      | |     \--> additive-expression
+      | |       |--> var
+      | |       | |--> array
+      | |       | |--> [
+      | |       | |--> 0
+      | |       | \--> ]
+      | |       |--> +
+      | |       \--> term
+      | |         |--> term
+      | |         | |--> e
+      | |         | |--> *
+      | |         | \--> var
+      | |         |   |--> array
+      | |         |   |--> [
+      | |         |   |--> 3
+      | |         |   \--> ]
+      | |         |--> /
+      | |         \--> additive-expression
+      | |           |--> var
+      | |           | |--> array
+      | |           | |--> [
+      | |           | |--> 2
+      | |           | \--> ]
+      | |           |--> +
+      | |           \--> var
+      | |             |--> array
+      | |             |--> [
+      | |             |--> 3
+      | |             \--> ]
+      | \--> call
+      |   |--> output
+      |   \--> term
+      |     |--> var
+      |     | |--> array
+      |     | |--> [
+      |     | |--> 0
+      |     | \--> ]
+      |     |--> *
+      |     \--> b
+      \--> }
+
+
+		END AST
+
+
+		START OF SYMBOL TABLES
+
+
+
+Symbol Table GLOBAL with Scope Level 0:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+===============================================================================
+===============================================================================
+
+
+Symbol Table GLOBAL->main with Scope Level 1:
+Name: input, Declared on line 0 with return type void and takes 0 parameter(s).
+Name: output, Declared on line 0 with return type int and takes 1 parameter(s).
+Name: main, Declared on line 1 with return type void and takes 0 parameter(s).
+-------------------------------------------------------------------------------
+Scope boundary. This is the end of scope level 1 (top of the local table).
+Name: array, Declared on line 3 and has an array bounds of 5.
+Name: a, Declared on line 4 and is not an Array.
+Name: b, Declared on line 5 and is not an Array.
+Name: c, Declared on line 6 and is not an Array.
+Name: d, Declared on line 7 and is not an Array.
+Name: e, Declared on line 8 and is not an Array.
+===============================================================================
+===============================================================================
+
+
+
+		END OF SYMBOL TABLES
+
+
+

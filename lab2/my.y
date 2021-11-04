@@ -9,9 +9,9 @@ int yylex();
     int intval;
     char* buffer;
 }
-%token<intval> T_NUM 
+%token<intval> T_NUM
 %token<buffer> T_ID
-%token RIGHT_COMMENT LEFT_COMMENT T_KEYWORD_IF T_KEYWORD_ELSE T_KEYWORD_INT T_KEYWORD_RETURN T_KEYWORD_VOID T_KEYWORD_WHILE 
+%token RIGHT_COMMENT LEFT_COMMENT T_KEYWORD_IF T_KEYWORD_ELSE T_KEYWORD_INT T_KEYWORD_RETURN T_KEYWORD_VOID T_KEYWORD_WHILE
 %token T_EQ T_NE T_LE T_GE
 %left '+' '-'
 %left '*' '/'
@@ -144,7 +144,7 @@ declaration_list    : declaration_list declaration { }
                     | declaration { }
                     ;
 
-program : declaration_list { printf("Parse Over!"); }
+program : declaration_list { printf("Parse Over!\n"); }
         ;
 %%
 
