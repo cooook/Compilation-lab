@@ -4,7 +4,7 @@
 #include "Symbol_table.h"
 void yyerror(const char *);
 Hash_Table Symbol_Table;
-extern int linenumber;
+extern int yylineno;
 int yylex();
 
 typedef struct astnode
@@ -17,7 +17,7 @@ typedef struct astnode
 
 %}
 %union{
-    int intval, linenumber;
+    int intval;
     char *varname;
 }
 
@@ -42,7 +42,7 @@ declaration_list : declaration_list declaration
 declaration : var_declaration
             | fun_declaration
             ;
-var_declaration : type_specifier ID ';' {  Symbol_Table[$2]->line_number = linenumber; Symbol_Table[$2]->type = $1; }
+var_declaration : type_specifier ID ';' {  Symbol_Table[$2]->line_number = yylineno; Symbol_Table[$2]->type = $1; }
                 | type_specifier ID '[' NUM ']' ';'
                 ;
 type_specifier : KEYWORD_INT {  }
