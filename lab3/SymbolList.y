@@ -98,25 +98,24 @@ var : ID {
          }
     | ID '[' expression ']' {  }
     ;
-simple_expression : additive_expression relop additive_expression { }
+simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $$ = $1 <= $3; }
+                  | additive_expression LESS_THAN additive_expression        { $$ = $1 < $3; }
+                  | additive_expression GREAT_THAN additive_expression       { $$ = $1 > $3; }
+                  | additive_expression GREAT_EQUAL_THAN additive_expression { $$ = $1 >= $3; }
+                  | additive_expression DOUBLE_EQUAL additive_expression     { $$ = $1 == $3; }
+                  | additive_expression NOT_EQUAL additive_expression        { $$ = $1 != $3; }
                   | additive_expression { $$ = $1; }
                   ;
-relop : LESS_EQUAL_THAN {}
-      | LESS_THAN {}
-      | GREAT_THAN {}
-      | GREAT_EQUAL_THAN {}
-      | DOUBLE_EQUAL {}
-      | NOT_EQUAL {}
-      ;
 additive_expression : additive_expression '+' term { $$ = $1 + $3; }
                     | additive_expression '-' term { $$ = $1 - $3; }
                     | term { $$ = $1; }
                     ;
 term : term '*' factor { $$ = $1 * $3; }
-     | term '/' factor { if (($3) != 0)
-                              $$ = $1 / $3;
-                         else
-                              yyerror("divide by zero");
+     | term '/' factor {
+                              if (($3) != 0)
+                                   $$ = $1 / $3;
+                              else
+                                   yyerror("divide by zero");
                        }
      | factor { $$ = $1;}
      ;
