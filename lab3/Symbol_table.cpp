@@ -47,22 +47,20 @@ Information*& Hash_Table::operator [] (char * Identifier) {
         return New_Entry(Identifier, Hash);
 }
 
-int Hash_Table::Count(char* Identifier) {
+bool Hash_Table::Count(char* Identifier) {
     unsigned long long Hash = Get_Hash(Identifier);
     for (int i = first[Hash % KEY]; i; i = a[i].next)
-        if (a[i].info && a[i].info -> Equ(Identifier)){
-            printf("%d", a[i].info -> Value);
-            return a[i].info -> Value;
-        }
+        if (a[i].info && a[i].info -> Equ(Identifier))
+            return true;
     return false;
 }
 
 void Hash_Table::printTable() {
-    printf("+-------------------------------------------+\n");
-    printf("|                Symbol Table               |\n");
-    printf("+----------+----------+----------+----------+\n");
-    printf("|  Symbol  |   Value  |   Line   |   Type   |\n");
-    printf("+----------+----------+----------+----------+\n");
+    printf("\n+-------------------------------------------+\n");
+      printf("|                Symbol Table               |\n");
+      printf("+----------+----------+----------+----------+\n");
+      printf("|  Symbol  |   Value  |   Line   |   Type   |\n");
+      printf("+----------+----------+----------+----------+\n");
     for(int i; i < head; i++){
         for (unsigned long long j = first[Symbol_List[i]]; j; j = a[j].next){
             printf("|%9s |%9d |%9d |%9s |\n", a[j].info->Identifier, a[j].info->Value, a[j].info->line_number, a[j].info->type);

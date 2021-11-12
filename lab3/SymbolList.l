@@ -21,6 +21,7 @@ NUM        {digit}{digit}*
 "while"                                         { printf("%s", yytext); return KEYWORD_WHILE; }
 {id}                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return ID; }
 {NUM}                                           { printf("%s", yytext); yylval.intval = atoi(yytext); return NUM; }
+"/*"[^*]*"*/"                                   { printf("%s", yytext); return MULTI_LINE_ANNOTATION; }
 .                                               { printf("%s", yytext); return 0; }
 
 %%

@@ -24,7 +24,7 @@ typedef struct astnode
 %token<intval> NUM
 %token<varname> ID
 %token LESS_EQUAL_THAN LESS_THAN GREAT_THAN GREAT_EQUAL_THAN DOUBLE_EQUAL NOT_EQUAL
-%token KEYWORD_ELSE KEYWORD_IF KEYWORD_INT KEYWORD_RETURN KEYWORD_VOID KEYWORD_WHILE
+%token KEYWORD_ELSE KEYWORD_IF KEYWORD_INT KEYWORD_RETURN KEYWORD_VOID KEYWORD_WHILE MULTI_LINE_ANNOTATION
 %type <intval> term factor expression simple_expression additive_expression
 %type <varname> var type_specifier
 %left '+' '-'
@@ -34,7 +34,7 @@ typedef struct astnode
 
 %%
 
-program : declaration_list
+program : comment declaration_list
         ;
 declaration_list : declaration_list declaration
                  | declaration
@@ -50,6 +50,9 @@ type_specifier : KEYWORD_INT {  }
                ;
 fun_declaration : type_specifier ID '(' params ')' compound_stmt { }
                 ;
+comment : MULTI_LINE_ANNOTATION
+        |
+        ;
 params : param_list {  }
        | KEYWORD_VOID { }
        ;
@@ -87,7 +90,12 @@ return_stmt : KEYWORD_RETURN ';' {}
 expression : var '=' expression { Symbol_Table[$1]->Value = $3; }
            | simple_expression { $$ = $1; }
            ;
-var : ID { Symbol_Table[$$]->Value = Symbol_Table[$1]->Value; }
+var : ID {
+               if (Symbol_Table.Count($1))
+                    Symbol_Table[$$]->Value = Symbol_Table[$1]->Value;
+               else
+                    yyerror(strcat($1, " was not declared in this scope."));
+         }
     | ID '[' expression ']' {  }
     ;
 simple_expression : additive_expression relop additive_expression { }

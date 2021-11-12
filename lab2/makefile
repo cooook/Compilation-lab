@@ -3,11 +3,13 @@ OUT = tcc
 OBJ = lex.yy.o y.tab.o
 SCANNER = my.l
 PARSER = my.y
+# TESTFILE = ../Tests/Test1/test1e.txt
+TESTFILE = ../Tests/test2.c
 
 build: $(OUT)
 
 run: $(OUT)
-	./$(OUT) < ../Tests/test2.c
+	./$(OUT) < $(TESTFILE)
 
 clean:
 	rm -f *.o lex.yy.c y.tab.c y.tab.h y.output $(OUT) test.asm

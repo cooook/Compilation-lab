@@ -29,7 +29,7 @@ public:
     unsigned long long Get_Hash(char*);
     Information*& New_Entry(char*, unsigned long long);
     Information*& operator [] (char *);
-    int Count(char*);
+    bool Count(char*);
     void printTable();
 };
 #endif
