@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <string>
 #include "Symbol_table.h"
 void yyerror(const char *);
 Hash_Table Symbol_Table;
@@ -113,7 +114,14 @@ simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $
                   | additive_expression GREAT_EQUAL_THAN additive_expression { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 >= $3; }
                   | additive_expression DOUBLE_EQUAL additive_expression     { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 == $3; }
                   | additive_expression NOT_EQUAL additive_expression        { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 != $3; }
-                  | additive_expression { $$ = $1; }
+                  | additive_expression {
+                                            $$ = $1;
+                                            if (Symbol_Table.Count($1->operand))
+                                                if (strcmp(Symbol_Table[$$->operand]->type, "int") == 0){
+                                                    std::string temp = std::string("The integer variable ") + std::string($1->operand) + std::string(" is used as a boolean");
+                                                    yyerror(temp.c_str());
+                                                }
+                                        }
                   ;
 additive_expression : additive_expression '+' term { $$ = makenode("+",$1,$3); $$->Val = $1->Val + $3->Val;}
                     | additive_expression '-' term { $$ = makenode("-",$1,$3); $$->Val = $1->Val - $3->Val;}
@@ -130,7 +138,10 @@ term : term '*' factor { $$ = makenode("*",$1,$3); $$->Val = $1->Val * $3->Val;}
      | factor { $$ = $1; }
      ;
 factor : '(' expression ')' { $$ = $2; }
-       | var { $$ = $1; $$->Val = Symbol_Table[$1->operand]->Value;}
+       | var {
+                $$ = $1;
+                $$->Val = Symbol_Table[$1->operand]->Value;
+             }
        | call { $$ = $1; }
        | NUM { $$ = makenode($1,NULL,NULL); $$->Val = atoi($1);}
        ;
