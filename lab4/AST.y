@@ -90,12 +90,12 @@ expression : var '=' expression { $$ = makenode("=",$1,$3); }
 var : ID {  $$ = makenode($1,NULL,NULL); }
     | ID '[' expression ']' {  }
     ;
-simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $$->Val = $1 <= $3; }
-                  | additive_expression LESS_THAN additive_expression        { $$->Val = $1 < $3; }
-                  | additive_expression GREAT_THAN additive_expression       { $$->Val = $1 > $3; }
-                  | additive_expression GREAT_EQUAL_THAN additive_expression { $$->Val = $1 >= $3; }
-                  | additive_expression DOUBLE_EQUAL additive_expression     { $$->Val = $1 == $3; }
-                  | additive_expression NOT_EQUAL additive_expression        { $$->Val = $1 != $3; }
+simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 <= $3; }
+                  | additive_expression LESS_THAN additive_expression        { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 < $3; }
+                  | additive_expression GREAT_THAN additive_expression       { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 > $3; }
+                  | additive_expression GREAT_EQUAL_THAN additive_expression { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 >= $3; }
+                  | additive_expression DOUBLE_EQUAL additive_expression     { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 == $3; }
+                  | additive_expression NOT_EQUAL additive_expression        { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 != $3; }
                   | additive_expression { $$ = $1; }
                   ;
 additive_expression : additive_expression '+' term { $$ = makenode("+",$1,$3); }
