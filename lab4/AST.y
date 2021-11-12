@@ -8,6 +8,7 @@ int yylex();
 typedef struct astnode
 {
      char operand[20];
+     int Val;
      struct astnode *left;
      struct astnode *right;
 }node;
@@ -24,7 +25,6 @@ int flags[100];
 
 %token<varname> ID NUM LESS_EQUAL_THAN LESS_THAN GREAT_THAN GREAT_EQUAL_THAN DOUBLE_EQUAL NOT_EQUAL
 %token<varname> KEYWORD_ELSE KEYWORD_IF KEYWORD_INT KEYWORD_RETURN KEYWORD_VOID KEYWORD_WHILE
-%type<varname> relop
 %type<node> program declaration_list declaration var_declaration type_specifier fun_declaration params param_list param compound_stmt local_declarations statement_list
 %type<node> statement expression_stmt selection_stmt iteration_stmt return_stmt expression var simple_expression additive_expression term factor call args arg_list
 %left '+' '-'
@@ -34,7 +34,7 @@ int flags[100];
 
 %%
 
-program : declaration_list { $$ = makenode("program", NULL, $1); printtree($$, 0, 0); exit(0); }
+program : declaration_list { $$ = makenode("program", NULL, $1); puts(""); printtree($$, 0, 0); exit(0); }
         ;
 declaration_list : declaration_list declaration
                  | declaration { $$ = $1; }
@@ -79,7 +79,7 @@ expression_stmt : expression ';' { $$=$1; }
 selection_stmt : KEYWORD_IF '(' expression ')' statement {}
                | KEYWORD_IF '(' expression ')' statement KEYWORD_ELSE statement {}
                ;
-iteration_stmt : KEYWORD_WHILE '(' expression ')' statement {}
+iteration_stmt : KEYWORD_WHILE '(' expression ')' statement { $$ = makenode("while", $3, $5); }
                ;
 return_stmt : KEYWORD_RETURN ';' { $$ = makenode("return\n", NULL, NULL); }
             | KEYWORD_RETURN expression ';' { }
@@ -90,16 +90,14 @@ expression : var '=' expression { $$ = makenode("=",$1,$3); }
 var : ID {  $$ = makenode($1,NULL,NULL); }
     | ID '[' expression ']' {  }
     ;
-simple_expression : additive_expression relop additive_expression { }
+simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $$->Val = $1 <= $3; }
+                  | additive_expression LESS_THAN additive_expression        { $$->Val = $1 < $3; }
+                  | additive_expression GREAT_THAN additive_expression       { $$->Val = $1 > $3; }
+                  | additive_expression GREAT_EQUAL_THAN additive_expression { $$->Val = $1 >= $3; }
+                  | additive_expression DOUBLE_EQUAL additive_expression     { $$->Val = $1 == $3; }
+                  | additive_expression NOT_EQUAL additive_expression        { $$->Val = $1 != $3; }
                   | additive_expression { $$ = $1; }
                   ;
-relop : LESS_EQUAL_THAN  { $$ = $1; }
-      | LESS_THAN        { $$ = $1; }
-      | GREAT_THAN       { $$ = $1; }
-      | GREAT_EQUAL_THAN { $$ = $1; }
-      | DOUBLE_EQUAL     { $$ = $1; }
-      | NOT_EQUAL        { $$ = $1; }
-      ;
 additive_expression : additive_expression '+' term { $$ = makenode("+",$1,$3); }
                     | additive_expression '-' term { $$ = makenode("-",$1,$3); }
                     | term { $$ = $1; }
