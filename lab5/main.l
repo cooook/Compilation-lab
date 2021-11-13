@@ -1,6 +1,7 @@
 %{
 #include "y.tab.h"
 void yyerror(const char *msg);
+int left_BRACE, right_BRACE;
 %}
 %option yylineno
 delim      [ \t]
@@ -12,7 +13,9 @@ NUM        {digit}{digit}*
 %%
 {delim}+                                        { printf("%s", yytext); }
 "\n"|"\r\n"                                     { printf("%s", yytext); }
-"{"|"}"|"["|"]"|"("|")"|";"|"/"|"*"|"-"|"+"|"=" { printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
+"{"                                             { left_BRACE++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
+"}"                                             { right_BRACE++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
+"["|"]"|"("|")"|";"|"/"|"*"|"-"|"+"|"="         { printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
 "else"                                          { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_ELSE; }
 "if"                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_IF; }
 "int"                                           { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_INT; }
@@ -36,6 +39,12 @@ int yywrap(void) {
     return 1;
 }
 void yyerror(const char *msg) {
+    if (left_BRACE < right_BRACE)
+        msg = "'{' is missing on the inner loop.";
+    else if (left_BRACE > right_BRACE)
+        msg = "'}' is missing on the inner loop.";
+    else
+        msg = "syntax error.";
     printf("\nline %d: error: %s\n", yylineno, msg);
     exit(1);
 }
