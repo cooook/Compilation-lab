@@ -50,6 +50,14 @@ clear && make clean && make run
 ```
 clear && make clean && make run
 ```
+## lab5
+
+合并 lab3，lab4 的功能。
+
+进入 lab5 目录，运行下列命令，会在终端输出语法树和符号表。
+```
+clear && make clean && make run
+```
 
 # Contributors
 @yym68686
