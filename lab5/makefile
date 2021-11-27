@@ -3,7 +3,7 @@ OUT = calc
 OBJ = lex.yy.o y.tab.o Symbol_table.o
 SCANNER = main.l
 PARSER = main.y
-TESTFILE = ../Tests/Test6/test6.txt
+TESTFILE = ../Tests/Test7/test7.txt
 
 build: $(OUT)
 

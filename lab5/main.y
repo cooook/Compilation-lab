@@ -20,7 +20,7 @@ typedef struct astnode
 node* makenode(const char rootname[20],node *left ,node *right);
 void printtree (node *tree, int tab, int flag);
 void printTabs(int numOfTabs);
-int flags[100];
+int flags[100], whileflag;
 %}
 %union{
     char* varname;
@@ -95,7 +95,15 @@ expression_stmt : expression ';' { $$=$1; }
 selection_stmt : KEYWORD_IF '(' expression ')' statement { $$ = makenode("if", $3, $5); }
                | KEYWORD_IF '(' expression ')' statement KEYWORD_ELSE statement { $$ = makenode("if", makenode("if_statement", $3, $5), makenode("else_statement", NULL, $7)); }
                ;
-iteration_stmt : KEYWORD_WHILE '(' expression ')' statement { $$ = makenode("while", $3, $5); }
+iteration_stmt : KEYWORD_WHILE '(' expression {
+                                                if (whileflag){
+                                                    std::string temp = std::string("The integer variable ") + std::string($3->operand) + std::string(" is used as a boolean");
+                                                    yyerror(temp.c_str());
+                                                }
+                                              }
+                ')' statement {
+                                $$ = makenode("while", $3, $6);
+                              }
                ;
 return_stmt : KEYWORD_RETURN ';' { $$ = makenode("return\n", NULL, NULL); }
             | KEYWORD_RETURN expression ';' { }
@@ -121,10 +129,8 @@ simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $
                   | additive_expression {
                                             $$ = $1;
                                             if (Symbol_Table.Count($1->operand))
-                                                if (strcmp(Symbol_Table[$$->operand]->type, "int") == 0){
-                                                    std::string temp = std::string("The integer variable ") + std::string($1->operand) + std::string(" is used as a boolean");
-                                                    yyerror(temp.c_str());
-                                                }
+                                                if (strcmp(Symbol_Table[$$->operand]->type, "int") == 0)
+                                                    whileflag = 1;
                                         }
                   ;
 additive_expression : additive_expression '+' term { $$ = makenode("+",$1,$3); $$->Val = $1->Val + $3->Val;}

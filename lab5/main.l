@@ -2,6 +2,7 @@
 #include "y.tab.h"
 void yyerror(const char *msg);
 int left_BRACE, right_BRACE;
+extern int whileflag;
 %}
 %option yylineno
 delim      [ \t]
@@ -39,6 +40,10 @@ int yywrap(void) {
     return 1;
 }
 void yyerror(const char *msg) {
+    if (whileflag){
+        printf("\nline %d: error: %s\n", yylineno, msg);
+        exit(1);
+    }
     if (left_BRACE < right_BRACE)
         msg = "'{' is missing on the inner loop.";
     else if (left_BRACE > right_BRACE)
