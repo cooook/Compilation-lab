@@ -28,21 +28,21 @@ int flags[100];
 }
 
 %token<varname> ID NUM LESS_EQUAL_THAN LESS_THAN GREAT_THAN GREAT_EQUAL_THAN DOUBLE_EQUAL NOT_EQUAL
-%token MULTI_LINE_ANNOTATION
-%token<varname> KEYWORD_ELSE KEYWORD_IF KEYWORD_INT KEYWORD_RETURN KEYWORD_VOID KEYWORD_WHILE
-%type<node> program declaration_list declaration var_declaration type_specifier fun_declaration params param_list param compound_stmt local_declarations statement_list
+%token<varname> KEYWORD_ELSE KEYWORD_IF KEYWORD_INT KEYWORD_RETURN KEYWORD_VOID KEYWORD_WHILE MULTI_LINE_ANNOTATION
+%type<node> program comment declaration_list declaration var_declaration type_specifier fun_declaration params param_list param compound_stmt local_declarations statement_list
 %type<node> statement expression_stmt selection_stmt iteration_stmt return_stmt expression var simple_expression additive_expression term factor call args arg_list
 %left '+' '-'
 %left '*' '/'
-%expect 1
+%expect 3
 
 
 %%
 
-program : comment declaration_list { $$ = makenode("program", NULL, $2); puts(""); printtree($$, 0, 0); }
+program : declaration_list { $$ = makenode("program", NULL, $1); puts(""); printtree($$, 0, 0); }
         ;
 declaration_list : declaration_list declaration
                  | declaration { $$ = $1; }
+                 | comment
                  ;
 declaration : var_declaration { $$ = $1; }
             | fun_declaration { $$ = $1; }
@@ -63,8 +63,8 @@ type_specifier : KEYWORD_INT { $$ = makenode($1, NULL, NULL); }
                ;
 fun_declaration : type_specifier ID '(' params ')' compound_stmt { $$ = makenode("fun_declaration", $1, $6); }
                 ;
-comment : MULTI_LINE_ANNOTATION
-        |
+comment : comment MULTI_LINE_ANNOTATION {}
+        | {}
         ;
 params : param_list { $$ = $1; }
        | KEYWORD_VOID { $$ = makenode($1, NULL, NULL); }
@@ -80,7 +80,7 @@ compound_stmt : '{' local_declarations statement_list '}' { $$ = makenode("compo
 local_declarations : local_declarations var_declaration { $$ = makenode("local-declarations", $1, $2); }
                    | { $$ = makenode("empty", NULL, NULL); }
                    ;
-statement_list : statement_list statement { $$ = makenode("statement_list", $1, $2); }
+statement_list : statement_list statement comment { $$ = makenode("statement_list", $1, $2); }
                | {$$ = makenode("empty", NULL, NULL); }
                ;
 statement : expression_stmt { $$ = $1; }

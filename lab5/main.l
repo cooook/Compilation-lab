@@ -30,7 +30,7 @@ NUM        {digit}{digit}*
 "!="                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return NOT_EQUAL; }
 {id}                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return ID; }
 {NUM}                                           { printf("%s", yytext); yylval.varname = strdup(yytext); return NUM; }
-"/*"[^*]*"*/"                                   { printf("%s", yytext); return MULTI_LINE_ANNOTATION; }
+"/*"[^*]*"*/"|"/*"[^*]*"*/"\n                                   { printf("%s", yytext); return MULTI_LINE_ANNOTATION; }
 .                                               { printf("%s", yytext); return 0; }
 
 %%
