@@ -92,8 +92,8 @@ statement : expression_stmt { $$ = $1; }
 expression_stmt : expression ';' { $$=$1; }
                 | ';' {}
                 ;
-selection_stmt : KEYWORD_IF '(' expression ')' statement {}
-               | KEYWORD_IF '(' expression ')' statement KEYWORD_ELSE statement {}
+selection_stmt : KEYWORD_IF '(' expression ')' statement { $$ = makenode("if", $3, $5); }
+               | KEYWORD_IF '(' expression ')' statement KEYWORD_ELSE statement { $$ = makenode("if", makenode("if_statement", $3, $5), makenode("else_statement", NULL, $7)); }
                ;
 iteration_stmt : KEYWORD_WHILE '(' expression ')' statement { $$ = makenode("while", $3, $5); }
                ;
