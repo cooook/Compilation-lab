@@ -20,7 +20,7 @@ void main(void)
 	int x;
 	int dx;
       	int  rx;
- 
+
 
       	while (x > 0)
      	{

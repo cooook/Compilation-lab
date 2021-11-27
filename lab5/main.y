@@ -40,7 +40,7 @@ int flags[100], whileflag;
 
 program : declaration_list { $$ = makenode("program", NULL, $1); puts(""); printtree($$, 0, 0); }
         ;
-declaration_list : declaration_list declaration
+declaration_list : declaration_list declaration { $$ = makenode("declaration_list", $1, $2); }
                  | declaration { $$ = $1; }
                  | comment
                  ;
@@ -69,11 +69,19 @@ comment : comment MULTI_LINE_ANNOTATION {}
 params : param_list { $$ = $1; }
        | KEYWORD_VOID { $$ = makenode($1, NULL, NULL); }
        ;
-param_list : param_list ',' param
+param_list : param_list ',' param { $$ = makenode("param_list", $1, $3); }
            | param { $$ = $1; }
            ;
-param : type_specifier ID
-      | type_specifier ID '[' ']'
+param : type_specifier ID {
+                            $$ = makenode("var-declaration", $1, makenode($2, NULL, NULL));
+                            Symbol_Table[$2]->line_number = yylineno;
+                            Symbol_Table[$2]->type = $1->operand;
+                          }
+      | type_specifier ID '[' ']' {
+                                    $$ = makenode("var-declaration", $1, makenode($2, NULL, NULL));
+                                    Symbol_Table[$2]->line_number = yylineno;
+                                    Symbol_Table[$2]->type = $1->operand;
+                                  }
       ;
 compound_stmt : '{' local_declarations statement_list '}' { $$ = makenode("compound_stmt", $2, $3); }
               ;
@@ -106,7 +114,7 @@ iteration_stmt : KEYWORD_WHILE '(' expression {
                               }
                ;
 return_stmt : KEYWORD_RETURN ';' { $$ = makenode("return\n", NULL, NULL); }
-            | KEYWORD_RETURN expression ';' { }
+            | KEYWORD_RETURN expression ';' { $$ = makenode("return", NULL, $2); }
             ;
 expression : var '=' expression { $$ = makenode("=",$1,$3); Symbol_Table[$1->operand]->Value = $3->Val;}
            | simple_expression { $$ = $1; }
@@ -155,7 +163,7 @@ factor : '(' expression ')' { $$ = $2; }
        | call { $$ = $1; }
        | NUM { $$ = makenode($1,NULL,NULL); $$->Val = atoi($1);}
        ;
-call : ID '(' args ')' {}
+call : ID '(' args ')' { $$ = makenode("call", makenode($1, NULL, NULL), $3); }
      ;
 args : arg_list { $$ = $1; }
      | {}
