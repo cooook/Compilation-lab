@@ -8,7 +8,7 @@ extern int whileflag;
 delim      [ \t]
 letter     [a-zA-Z]
 digit      [0-9]
-id         {letter}{letter}*
+id         {letter}{letter}*|{letter}{digit}*
 NUM        {digit}{digit}*
 
 %%
