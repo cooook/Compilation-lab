@@ -44,12 +44,12 @@ void yyerror(const char *msg) {
         printf("\nline %d: error: %s\n", yylineno, msg);
         exit(1);
     }
-    // if (left_BRACE < right_BRACE)
-    //     msg = "'{' is missing on the inner loop.";
-    // else if (left_BRACE > right_BRACE)
-    //     msg = "'}' is missing on the inner loop.";
-    // else
-    //     msg = "syntax error.";
+    if (left_BRACE < right_BRACE)
+        msg = "'{' is missing on the inner loop.";
+    else if (left_BRACE > right_BRACE)
+        msg = "'}' is missing on the inner loop.";
+    else
+        msg = "syntax error.";
     printf("\nline %d: error: %s\n", yylineno, msg);
     exit(1);
 }
