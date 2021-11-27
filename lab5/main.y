@@ -52,7 +52,11 @@ var_declaration : type_specifier ID ';' {
                                             Symbol_Table[$2]->line_number = yylineno;
                                             Symbol_Table[$2]->type = $1->operand;
                                         }
-                | type_specifier ID '[' NUM ']' ';'
+                | type_specifier ID '[' NUM ']' ';' {
+                                                        $$ = makenode("var-declaration", $1, makenode($2, NULL, NULL));
+                                                        Symbol_Table[$2]->line_number = yylineno;
+                                                        Symbol_Table[$2]->type = $1->operand;
+                                                    }
                 ;
 type_specifier : KEYWORD_INT { $$ = makenode($1, NULL, NULL); }
                | KEYWORD_VOID { $$ = makenode($1, NULL, NULL); }
@@ -106,7 +110,7 @@ var : ID {
             else
                 yyerror(strcat($1, " was not declared in this scope."));
          }
-    | ID '[' expression ']' {  }
+    | ID '[' expression ']' { $$ = makenode("var", makenode($1,NULL,NULL), $3); }
     ;
 simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 <= $3; }
                   | additive_expression LESS_THAN additive_expression        { $$ = makenode("simple_expression", $1, $3); $$->Val = $1 < $3; }
