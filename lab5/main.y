@@ -38,7 +38,7 @@ int flags[100], whileflag, declared_error;
 
 %%
 
-program : declaration_list { $$ = makenode("program", NULL, $1); puts(""); printtree($$, 0, 0); }
+program : declaration_list { $$ = makenode("program", NULL, $1); puts(""); printtree($$, 0, 0); } //打印抽象语法树
         ;
 declaration_list : declaration_list declaration { $$ = makenode("declaration_list", $1, $2); }
                  | declaration { $$ = $1; }
@@ -48,13 +48,13 @@ declaration : var_declaration { $$ = $1; }
             | fun_declaration { $$ = $1; }
             ;
 var_declaration : type_specifier ID ';' {
-                                            $$ = makenode("var-declaration", $1, makenode($2, NULL, NULL));
+                                            $$ = makenode("var-declaration", $1, makenode($2, NULL, NULL)); // 建立抽象语法树节点
                                             Symbol_Table[$2]->line_number = yylineno;
                                             Symbol_Table[$2]->type = $1->operand;
                                         }
                 | type_specifier ID '[' NUM ']' ';' {
                                                         $$ = makenode("var-declaration", $1, makenode($2, NULL, NULL));
-                                                        Symbol_Table[$2]->line_number = yylineno;
+                                                        Symbol_Table[$2]->line_number = yylineno; //将行号放入符号表
                                                         Symbol_Table[$2]->type = $1->operand;
                                                     }
                 ;
@@ -105,7 +105,7 @@ selection_stmt : KEYWORD_IF '(' expression ')' statement { $$ = makenode("if", $
                ;
 iteration_stmt : KEYWORD_WHILE '(' expression {
                                                 if (whileflag){
-                                                    std::string temp = std::string("The integer variable ") + std::string($3->operand) + std::string(" is used as a boolean");
+                                                    std::string temp = std::string("The integer variable ") + std::string($3->operand) + std::string(" is used as a boolean"); //检测变量类型使用错误。
                                                     yyerror(temp.c_str());
                                                 }
                                               }
@@ -124,7 +124,7 @@ var : ID {
             if (Symbol_Table.Count($1))
                 Symbol_Table[$$->operand]->Value = Symbol_Table[$1]->Value;
             else
-                declared_error = 1, yyerror(strcat($1, " was not declared in this scope."));
+                declared_error = 1, yyerror(strcat($1, " was not declared in this scope.")); // 检测变量未声明
          }
     | ID '[' expression ']' { $$ = makenode("var", makenode($1,NULL,NULL), $3); }
     ;
@@ -137,7 +137,7 @@ simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $
                   | additive_expression {
                                             $$ = $1;
                                             if (Symbol_Table.Count($1->operand))
-                                                if (strcmp(Symbol_Table[$$->operand]->type, "int") == 0)
+                                                if (strcmp(Symbol_Table[$$->operand]->type, "int") == 0) // 检测while参数出现错误。
                                                     whileflag = 1;
                                         }
                   ;
@@ -182,7 +182,7 @@ node *makenode(const char* rootname,node *left, node *right )
 	return newnode;
 }
 
-void printtree (node* tree, int tab, int flag){
+void printtree (node* tree, int tab, int flag){ //打印抽象语法树
     int nextTab = tab;
     if (strlen(tree->operand) > 0) {
         if (strcmp(tree->operand, "empty") != 0){
@@ -221,7 +221,7 @@ void printtree (node* tree, int tab, int flag){
     }
 }
 
-void printTabs(int numOfTabs) {
+void printTabs(int numOfTabs) { //打印抽象语法树每一行的缩进
     int i;
     for (i = 0; i < numOfTabs; i++) {
         if (flags[i] == 0)

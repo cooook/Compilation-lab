@@ -18,7 +18,7 @@ NUM        {digit}{digit}*
 "}"                                             { right_BRACE++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
 "("                                             { left_parenthesis++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
 ")"                                             { right_parenthesis++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
-"["|"]"|";"|"/"|"*"|"-"|"+"|"="|","     { printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
+"["|"]"|";"|"/"|"*"|"-"|"+"|"="|","             { printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
 "else"                                          { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_ELSE; }
 "if"                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_IF; }
 "int"                                           { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_INT; }
@@ -51,8 +51,8 @@ void yyerror(const char *msg) {
         exit(1);
     }
     if (left_parenthesis < right_parenthesis)
-        msg = "'(' is missing on the inner loop.";
-    else if (left_parenthesis > right_parenthesis)
+        msg = "'(' is missing on the inner loop."; //缺失左括号
+    else if (left_parenthesis > right_parenthesis) 
         msg = "')' is missing on the inner loop.";
     else if (left_BRACE < right_BRACE)
         msg = "'{' is missing on the inner loop.";
