@@ -1,8 +1,8 @@
 %{
 #include "y.tab.h"
 void yyerror(const char *msg);
-int left_BRACE, right_BRACE;
-extern int whileflag;
+int left_BRACE, right_BRACE, left_parenthesis, right_parenthesis;
+extern int whileflag, declared_error;
 %}
 %option yylineno
 delim      [ \t]
@@ -16,7 +16,9 @@ NUM        {digit}{digit}*
 "\n"|"\r\n"                                     { printf("%s", yytext); }
 "{"                                             { left_BRACE++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
 "}"                                             { right_BRACE++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
-"["|"]"|"("|")"|";"|"/"|"*"|"-"|"+"|"="|","     { printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
+"("                                             { left_parenthesis++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
+")"                                             { right_parenthesis++; printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
+"["|"]"|";"|"/"|"*"|"-"|"+"|"="|","     { printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
 "else"                                          { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_ELSE; }
 "if"                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_IF; }
 "int"                                           { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_INT; }
@@ -44,7 +46,15 @@ void yyerror(const char *msg) {
         printf("\nline %d: error: %s\n", yylineno, msg);
         exit(1);
     }
-    if (left_BRACE < right_BRACE)
+    if (declared_error){
+        printf("\nline %d: error: %s\n", yylineno, msg);
+        exit(1);
+    }
+    if (left_parenthesis < right_parenthesis)
+        msg = "'(' is missing on the inner loop.";
+    else if (left_parenthesis > right_parenthesis)
+        msg = "')' is missing on the inner loop.";
+    else if (left_BRACE < right_BRACE)
         msg = "'{' is missing on the inner loop.";
     else if (left_BRACE > right_BRACE)
         msg = "'}' is missing on the inner loop.";

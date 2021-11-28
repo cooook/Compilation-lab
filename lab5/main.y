@@ -20,7 +20,7 @@ typedef struct astnode
 node* makenode(const char rootname[20],node *left ,node *right);
 void printtree (node *tree, int tab, int flag);
 void printTabs(int numOfTabs);
-int flags[100], whileflag;
+int flags[100], whileflag, declared_error;
 %}
 %union{
     char* varname;
@@ -124,7 +124,7 @@ var : ID {
             if (Symbol_Table.Count($1))
                 Symbol_Table[$$->operand]->Value = Symbol_Table[$1]->Value;
             else
-                yyerror(strcat($1, " was not declared in this scope."));
+                declared_error = 1, yyerror(strcat($1, " was not declared in this scope."));
          }
     | ID '[' expression ']' { $$ = makenode("var", makenode($1,NULL,NULL), $3); }
     ;
