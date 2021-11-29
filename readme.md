@@ -1,6 +1,10 @@
-# 基于 flex Bison 的 C 语言编译器
+# 基于 flex Bison 的 C-- 语言编译器
 
 本项目是 NUAA 编译原理Ⅱ的课程实验。
+
+注意点：
+- 抽象语法树节点只有左右子树，还有很大的改进空间，只涉及少许语义分析。
+- 符号表仅实现哈希表查找，更新，变量的行号与类型，变量的作用范围没有完成。
 
 # 上手指南
 
@@ -58,7 +62,7 @@ clear && make clean && make run
 ```
 clear && make clean && make run
 ```
-
+更多细节见：https://yym68686.top/flex-Bison-C-a5d93e95143248f1a0a31f7da102dad4
 # Contributors
 @yym68686
 @cooook
