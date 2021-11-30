@@ -8,9 +8,9 @@ void main(void)
    int j;
    int array[50];
 
-   i=0; 
+   i=0;
    array[100] = 0;
- 
+
    while (i < 5 < j )
    {
       j=0;

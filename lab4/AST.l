@@ -1,7 +1,6 @@
 %{
 #include "y.tab.h"
 void yyerror(const char *msg);
-int linenumber = 1;
 %}
 %option yylineno
 delim      [ \t]
@@ -12,7 +11,7 @@ NUM        {digit}{digit}*
 
 %%
 {delim}+                                        { printf("%s", yytext); }
-"\n"|"\r\n"                                     { printf("%s", yytext); linenumber++; }
+"\n"|"\r\n"                                     { printf("%s", yytext); }
 "{"|"}"|"["|"]"|"("|")"|";"|"/"|"*"|"-"|"+"|"=" { printf("%s", yytext); yylval.varname = strdup(yytext); return yytext[0];}
 "else"                                          { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_ELSE; }
 "if"                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_IF; }
@@ -20,6 +19,12 @@ NUM        {digit}{digit}*
 "return"                                        { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_RETURN; }
 "void"                                          { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_VOID; }
 "while"                                         { printf("%s", yytext); yylval.varname = strdup(yytext); return KEYWORD_WHILE; }
+"<"                                             { printf("%s", yytext); yylval.varname = strdup(yytext); return LESS_THAN; }
+"<="                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return LESS_EQUAL_THAN; }
+">"                                             { printf("%s", yytext); yylval.varname = strdup(yytext); return GREAT_THAN; }
+">="                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return GREAT_EQUAL_THAN; }
+"=="                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return DOUBLE_EQUAL; }
+"!="                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return NOT_EQUAL; }
 {id}                                            { printf("%s", yytext); yylval.varname = strdup(yytext); return ID; }
 {NUM}                                           { printf("%s", yytext); yylval.varname = strdup(yytext); return NUM; }
 .                                               { printf("%s", yytext); return 0; }

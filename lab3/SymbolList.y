@@ -4,7 +4,7 @@
 #include "Symbol_table.h"
 void yyerror(const char *);
 Hash_Table Symbol_Table;
-extern int linenumber;
+extern int yylineno;
 int yylex();
 
 typedef struct astnode
@@ -17,14 +17,14 @@ typedef struct astnode
 
 %}
 %union{
-    int intval, linenumber;
+    int intval;
     char *varname;
 }
 
 %token<intval> NUM
 %token<varname> ID
 %token LESS_EQUAL_THAN LESS_THAN GREAT_THAN GREAT_EQUAL_THAN DOUBLE_EQUAL NOT_EQUAL
-%token KEYWORD_ELSE KEYWORD_IF KEYWORD_INT KEYWORD_RETURN KEYWORD_VOID KEYWORD_WHILE
+%token KEYWORD_ELSE KEYWORD_IF KEYWORD_INT KEYWORD_RETURN KEYWORD_VOID KEYWORD_WHILE MULTI_LINE_ANNOTATION
 %type <intval> term factor expression simple_expression additive_expression
 %type <varname> var type_specifier
 %left '+' '-'
@@ -34,7 +34,7 @@ typedef struct astnode
 
 %%
 
-program : declaration_list
+program : comment declaration_list
         ;
 declaration_list : declaration_list declaration
                  | declaration
@@ -42,7 +42,7 @@ declaration_list : declaration_list declaration
 declaration : var_declaration
             | fun_declaration
             ;
-var_declaration : type_specifier ID ';' {  Symbol_Table[$2]->line_number = linenumber; Symbol_Table[$2]->type = $1; }
+var_declaration : type_specifier ID ';' {  Symbol_Table[$2]->line_number = yylineno; Symbol_Table[$2]->type = $1; }
                 | type_specifier ID '[' NUM ']' ';'
                 ;
 type_specifier : KEYWORD_INT {  }
@@ -50,6 +50,9 @@ type_specifier : KEYWORD_INT {  }
                ;
 fun_declaration : type_specifier ID '(' params ')' compound_stmt { }
                 ;
+comment : MULTI_LINE_ANNOTATION
+        |
+        ;
 params : param_list {  }
        | KEYWORD_VOID { }
        ;
@@ -87,28 +90,32 @@ return_stmt : KEYWORD_RETURN ';' {}
 expression : var '=' expression { Symbol_Table[$1]->Value = $3; }
            | simple_expression { $$ = $1; }
            ;
-var : ID { Symbol_Table[$$]->Value = Symbol_Table[$1]->Value; }
+var : ID {
+               if (Symbol_Table.Count($1))
+                    Symbol_Table[$$]->Value = Symbol_Table[$1]->Value;
+               else
+                    yyerror(strcat($1, " was not declared in this scope."));
+         }
     | ID '[' expression ']' {  }
     ;
-simple_expression : additive_expression relop additive_expression { }
+simple_expression : additive_expression LESS_EQUAL_THAN additive_expression  { $$ = $1 <= $3; }
+                  | additive_expression LESS_THAN additive_expression        { $$ = $1 < $3; }
+                  | additive_expression GREAT_THAN additive_expression       { $$ = $1 > $3; }
+                  | additive_expression GREAT_EQUAL_THAN additive_expression { $$ = $1 >= $3; }
+                  | additive_expression DOUBLE_EQUAL additive_expression     { $$ = $1 == $3; }
+                  | additive_expression NOT_EQUAL additive_expression        { $$ = $1 != $3; }
                   | additive_expression { $$ = $1; }
                   ;
-relop : LESS_EQUAL_THAN {}
-      | LESS_THAN {}
-      | GREAT_THAN {}
-      | GREAT_EQUAL_THAN {}
-      | DOUBLE_EQUAL {}
-      | NOT_EQUAL {}
-      ;
 additive_expression : additive_expression '+' term { $$ = $1 + $3; }
                     | additive_expression '-' term { $$ = $1 - $3; }
                     | term { $$ = $1; }
                     ;
 term : term '*' factor { $$ = $1 * $3; }
-     | term '/' factor { if (($3) != 0 )
-                              $$ = $1 / $3;
-                         else
-                              yyerror("divide by zero");
+     | term '/' factor {
+                              if (($3) != 0)
+                                   $$ = $1 / $3;
+                              else
+                                   yyerror("divide by zero");
                        }
      | factor { $$ = $1;}
      ;

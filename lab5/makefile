@@ -1,9 +1,10 @@
 CC = g++
 OUT = calc
-OBJ = lex.yy.o y.tab.o
-SCANNER = AST.l
-PARSER = AST.y
-TESTFILE = ../Tests/Test2/test2.txt
+OBJ = lex.yy.o y.tab.o Symbol_table.o
+SCANNER = main.l
+PARSER = main.y
+NUM = 1
+TESTFILE = ../Tests/Test$(NUM)/test$(NUM).txt
 
 build: $(OUT)
 
@@ -21,3 +22,6 @@ lex.yy.c: $(SCANNER) y.tab.c
 
 y.tab.c: $(PARSER)
 	bison -vdty -Wno-yacc $<
+
+Symbol_table.o: Symbol_table.cpp
+	$(CC) -c $<
